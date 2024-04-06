@@ -1542,8 +1542,29 @@
                         <div class="section-nav-name">Подать документы</div>
                     </div>
                 </a> -->
+          <?php 
+                // session_start();
+                $subjects = ["Русский язык", "История",  "География", "Иностранный язык", "Литература", "Химия", "Физика", "Биология", "Физическая культура", "Обществознание", "Математика", "Информатика и ИКТ"];
+                $id = "form";
 
-          <a
+                for ($i = 0; $i < 12; $i++) {
+                    $new_id = $id.$i;
+                    ?>
+                    <a
+                        href="#" class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box" onclick="document.getElementById('<?php echo $new_id ?>').submit()">
+                        <form action="session.php" method="post" id="<?php echo $new_id ?>">
+                            <input type="hidden" value="<?php echo $subjects[$i] ?>" name="subject">
+                            <div class="section-nav-item">
+                                <div class="section-nav-count"><?php echo $i + 1 ?></div>
+                                <div class="section-nav-name"><?php echo $subjects[$i] ?></div>
+                            </div>
+                        </form>
+                    </a>
+            <?php
+                }
+            ?>
+
+          <!-- <a
             href="ITandIKT.php"
             class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
           >
@@ -1662,7 +1683,7 @@
               <div class="section-nav-count">12</div>
               <div class="section-nav-name">Информатика и ИКТ</div>
             </div>
-          </a>
+          </a> -->
 
           <!-- <a href="https://itport.ugrasu.ru/abiturient#/"
                    class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box">

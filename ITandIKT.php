@@ -1,3 +1,7 @@
+<?php 
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="ru" class="bx-core bx-mac bx-no-touch bx-no-retina bx-chrome">
   <head>
@@ -1096,10 +1100,21 @@
 
         <div class="header-content">
           <div class="header-content-info">
-            <h1 class="subject-title">Информатика и
-              информационно-
-              коммуникационные
-              технологии</h1>
+            <?php 
+                $subject = $_SESSION['subject'];
+                $connection = mysqli_connect("127.0.0.1", "root", "", "pdo");
+                $sql = "SELECT * FROM subject WHERE name = '$subject'";
+                $result = $connection->query($sql);
+                foreach ($result as $row) {
+                    $fullname = $row['fullname'];
+                    $path = $row['path'];
+            ?>
+                    <h1 class="subject-title"><?php echo $fullname ?></h1>
+            <?php
+                }
+                mysqli_close($connection);
+            ?>
+            
 
             <div class="header-second-title">
               Навстречу профессиональному будущему!
@@ -1126,9 +1141,9 @@
 
         <div class="header-bottom">
           <div class="nav-link-block">
-            <a href="index.html">Главная</a>
+            <a href="index.php">Главная</a>
             <a href="#"> > </a>
-            <a href="ITandIKT.html" >Информатика и ИКТ</a>
+            <a href="ITandIKT.php" ><?php echo $_SESSION['subject'] ?></a>
             
 
           </div>
@@ -1144,7 +1159,25 @@
     <h1 style="padding-left: 60px;">Специальности</h1>
     <div class="specialities">
       <ul>
-        <li>Строительство</li>
+        <?php
+            $subject = $_SESSION['subject'];
+            $connection = mysqli_connect("127.0.0.1", "root", "", "pdo");
+            $stmt = "SELECT id FROM subject WHERE name = '$subject'";
+            $query = mysqli_query($connection, $stmt);
+            $result = mysqli_fetch_all($query);
+            $id = $result[0][0];
+
+            $sql = "SELECT * FROM specialties WHERE subject_id = '$id'";
+            $result = $connection->query($sql);
+            foreach ($result as $row) {
+                $name = $row['name'];
+        ?>
+                <li><?php echo $name ?></li>
+
+        <?php
+            }
+        ?>
+        <!-- <li>Строительство</li>
         <li> Техносферная безопасность</li>
         <li>Нефтегазовое дело</li>
         <li>Электроэнергетика и электротехника</li>
@@ -1152,11 +1185,11 @@
         <li>Программная инженерия</li>
         <li>Информационная безопасность</li>
         <li>Менеджмент </li>
-        <li>Экономика</li>
+        <li>Экономика</li> -->
       </ul>
     </div>
     <h1 style="padding-left: 60px; margin-top: 30px;">Программа подготовки</h1>
-    <h3><a href="#" style="text-decoration: none; color: gray; padding-left: 100px">Документ PDF</a></h3>
+    <h3><a href="<?php echo $path ?>" style="text-decoration: none; color: gray; padding-left: 100px">Документ PDF</a></h3>
     <h1 style="padding-left: 60px; margin-top: 30px;">Пройти тестирование</h1>
     <div class="test-list">
       <ul>
