@@ -1544,7 +1544,7 @@
                 </a> -->
 
           <a
-            href="/university/education/higher-education/"
+            href="ITandIKT.php"
             class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
           >
             <div class="section-nav-item">
