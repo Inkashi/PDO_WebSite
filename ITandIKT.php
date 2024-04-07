@@ -1,3 +1,8 @@
+<?php 
+  session_start();
+  require 'connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="ru" class="bx-core bx-mac bx-no-touch bx-no-retina bx-chrome">
   <head>
@@ -39,7 +44,7 @@
       (function (w, d, n) {
         var cl = "bx-core";
         var ht = d.documentElement;
-        var htc = ht ? ht.className : undefined;
+        var htc = ht ? ht.className : undefined;d
         if (htc === undefined || htc.indexOf(cl) !== -1) {
           return;
         }
@@ -806,7 +811,7 @@
                     <li>
                       <a
                         href="/student/extracurricular-activities/russian-student-groups/"
-                        >�&nbsp;оссийские студенческие отряды</a
+                        >Российские студенческие отряды</a
                       >
                     </li>
                   </ul>
@@ -1096,10 +1101,20 @@
 
         <div class="header-content">
           <div class="header-content-info">
-            <h1 class="subject-title">Информатика и
-              информационно-
-              коммуникационные
-              технологии</h1>
+            <?php 
+                $subject = $_SESSION['subject'];
+                
+                $sql = "SELECT * FROM subject WHERE name = '$subject'";
+                $result = $link->query($sql);
+                foreach ($result as $row) {
+                    $fullname = $row['fullname'];
+                    $path = $row['path'];
+            ?>
+                    <h1 class="main-title"><?php echo $fullname ?></h1>
+            <?php
+                }
+            ?>
+            
 
             <div class="header-second-title">
               Навстречу профессиональному будущему!
@@ -1125,11 +1140,9 @@
         </div>
 
         <div class="header-bottom">
-          <div class="nav-link-block">
-            <a href="index.html">Главная</a>
-            <a href="#"> > </a>
-            <a href="ITandIKT.html" >Информатика и ИКТ</a>
-            
+          <div class="bread">
+            <div class="bread-item"><a href="index.php"><span>Главная</span></a><i></i></div>
+            <div class="bread-item"> <a href="ITandIKT.php" class="bread-item"><span><?php echo $_SESSION['subject'] ?></span></a></div>
 
           </div>
           <!-- <a href="/directory/" class="hbottom-btn btn-directory">
@@ -1138,13 +1151,30 @@
         </div>
       </div>
 
-      <div class="back-font">Русский <br />язык</div>
+      <div class="back-font">Русский язык</div>
     </header>
   <div class="container">
-    <h1 style="padding-left: 60px;">Специальности</h1>
+    <h2 >Специальности</h2>
     <div class="specialities">
       <ul>
-        <li>Строительство</li>
+        <?php
+            $subject = $_SESSION['subject'];
+            $stmt = "SELECT id FROM subject WHERE name = '$subject'";
+            $query = mysqli_query($link, $stmt);
+            $result = mysqli_fetch_all($query);
+            $id = $result[0][0];
+
+            $sql = "SELECT * FROM specialties WHERE subject_id = '$id'";
+            $result = $link->query($sql);
+            foreach ($result as $row) {
+                $name = $row['name'];
+        ?>
+                <li><?php echo $name ?></li>
+
+        <?php
+            }
+        ?>
+        <!-- <li>Строительство</li>
         <li> Техносферная безопасность</li>
         <li>Нефтегазовое дело</li>
         <li>Электроэнергетика и электротехника</li>
@@ -1152,18 +1182,18 @@
         <li>Программная инженерия</li>
         <li>Информационная безопасность</li>
         <li>Менеджмент </li>
-        <li>Экономика</li>
+        <li>Экономика</li> -->
       </ul>
     </div>
-    <h1 style="padding-left: 60px; margin-top: 30px;">Программа подготовки</h1>
-    <h3><a href="#" style="text-decoration: none; color: gray; padding-left: 100px">Документ PDF</a></h3>
-    <h1 style="padding-left: 60px; margin-top: 30px;">Пройти тестирование</h1>
+    <h2>Программа подготовки</h2>
+    <div><a href="<?php echo $path ?>" class="doc-name" style="text-decoration: none; color: gray;">Документ PDF</a></div>
+    <h2>Пройти тестирование</h2>
     <div class="test-list">
       <ul>
-        <li><a href="test.php">1 Вариант</a></li>
-        <li>2 Вариант</li>
-        <li>3 Вариант</li>
-        <li>n Вариант</li>
+        <li><a href="variant.php" class="variant"><div>1</div>Вариант</a></li>
+        <li><a href="variant.php" class="variant" ><div>2</div>Вариант</a></li>
+        <li><a href="variant.php"class="variant"><div>3</div>Вариант</a></li>
+        <li><a href="variant.php"class="variant"><div>n</div>Вариант</a></li>
       </ul>
 
 
@@ -1709,7 +1739,7 @@
                   target="_blank"
                   class="minobr"
                 >
-                  Министерство науки и высшего образования �&nbsp;оссийской
+                  Министерство науки и высшего образования Российской
                   Федерации
                 </a>
               </div>
@@ -1733,10 +1763,6 @@
               </div>
 
               <div class="section-foot-menu">
-                <a class="special_v" href="/?special_version=Y" rel="nofollow">
-                  <span>Версия для слабовидящих</span>
-                </a>
-
                 <a
                   href="/university/university/internet-reception/"
                   class="menu-link"
@@ -1790,10 +1816,9 @@
               <a target="_blank" href="http://top.mail.ru/jump?from=1235539">
                 <img
                   src="//top-fwz1.mail.ru/counter?id=1235539;t=479;l=1"
-                  border="0"
                   height="31"
                   width="88"
-                  alt="�&nbsp;ейтинг@Mail.ru"
+                  alt="Рейтинг@Mail.ru"
                 />
               </a>
               <!-- //Rating@Mail.ru logo -->

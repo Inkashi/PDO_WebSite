@@ -1,3 +1,10 @@
+<?php 
+  session_start();
+  require 'connect.php';
+  $query = "SELECT * FROM exercises WHERE subject = 'History' and variant = 1";
+  $stmt = mysqli_query($link, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="ru" class="bx-core bx-mac bx-no-touch bx-no-retina bx-chrome">
   <head>
@@ -39,7 +46,7 @@
       (function (w, d, n) {
         var cl = "bx-core";
         var ht = d.documentElement;
-        var htc = ht ? ht.className : undefined;
+        var htc = ht ? ht.className : undefined;d
         if (htc === undefined || htc.indexOf(cl) !== -1) {
           return;
         }
@@ -115,7 +122,6 @@
       src="js/openapi.917ca96d9331f956d945e39706791fde.js"
     ></script>
   </head>
-
   <body>
     <div id="panel"></div>
 
@@ -225,7 +231,7 @@
 
                     <li>
                       <a href="/university/university/leadership/"
-                        >�&nbsp;уководство</a
+                        >Руководство</a
                       >
                     </li>
 
@@ -807,7 +813,7 @@
                     <li>
                       <a
                         href="/student/extracurricular-activities/russian-student-groups/"
-                        >�&nbsp;оссийские студенческие отряды</a
+                        >Российские студенческие отряды</a
                       >
                     </li>
                   </ul>
@@ -1097,7 +1103,20 @@
 
         <div class="header-content">
           <div class="header-content-info">
-            <h1 class="main-title">Месторождение <br />знаний</h1>
+            <?php 
+                $subject = $_SESSION['subject'];
+                
+                $sql = "SELECT * FROM subject WHERE name = '$subject'";
+                $result = $link->query($sql);
+                foreach ($result as $row) {
+                    $fullname = $row['fullname'];
+                    $path = $row['path'];
+            ?>
+                    <h1 class="main-title"><?php echo $fullname ?></h1>
+            <?php
+                }
+            ?>
+            
 
             <div class="header-second-title">
               Навстречу профессиональному будущему!
@@ -1119,622 +1138,64 @@
             >
               <source src="media/head-img1.mp4" type="video/mp4" />
             </video>
-          </div>
+          </div>  
         </div>
 
         <div class="header-bottom">
+          <div class="bread">
+            <div class="bread-item"><a href="index.php"><span>Главная</span></a><i></i></div>
+            <div class="bread-item"> <a href="ITandIKT.php" class="bread-item"><span><?php echo $_SESSION['subject'] ?></span></a><i></i></div>
+            <div class="bread-item"> <a href="Variant.php" class="bread-item"><span>Вариант</span></a></div>
+          </div>
           <!-- <a href="/directory/" class="hbottom-btn btn-directory">
                     <span>Справочник</span>
                 </a> -->
         </div>
       </div>
 
-      <div class="back-font">Югорский <br />государственный</div>
+      <div class="back-font">Русский язык</div>
     </header>
-
-    <div class="show-promo">
-      <div class="close-promo"></div>
-
-      <!-- <iframe id="youtube-show-promo" width="560" height="315" src="https://www.youtube.com/embed/hSz6LvGEUKA"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe> -->
-    </div>
-
-    <!-- Вызов модального окна при первом заходе - Мы обновились -->
-    <div class="overlay overlay-start">
-      <div class="modal" id="modal2">
-        <a class="btn close-modal" data-modal="#modal2" href="#"></a>
-        <div class="content">
-          <h2>Мы обновились!</h2>
-
-          <div class="modal-start-text">
-            <p>
-              Добро пожаловать на обновленный сайт <br />Югорского
-              государственного университета!
-            </p>
-
-            <p>
-              На данный момент мы заканчиваем работы по наполнению и доработке
-              функционала, просим вас отнестись с пониманием.
-            </p>
-
-            <p>
-              Если вы нашли грамматическую ошибку или ошибку, связанную с
-              отображением сайта, просьба направлять замечания на почту:
-              <a href="mailto:site@ugrasu.ru">site@ugrasu.ru</a>
-            </p>
-
-            <p>
-              Перейти на старую версию сайта можно по
-              <a href="https://wwwold.ugrasu.ru/">ссылке</a>.
-            </p>
+  <div class="container">
+    <h2 >Вариант 1</h2>
+    <form action="check.php" method='post'>
+          <div class="task">
+            <div><span>Номер задачи</span> Описание задачи (задача в которой просто ответ в input)</div>
+            <input>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Вызов модального окна по клику на кнопку "Начать обучение" -->
-    <div class="overlay">
-      <div class="modal" id="modal32">
-        <a class="btn close-modal" data-modal="#modal32" href="#"></a>
-        <div class="content">
-          <h2>Задай вопрос</h2>
-
-          <div id="comp_5d15b07c13f1658b7a203c18ef6931ae">
-            <!--'start_frame_cache_fW13iv'--><!--'start_frame_cache_4enrz3'-->
-
-            <form
-              name="main2023"
-              action="/"
-              method="POST"
-              enctype="multipart/form-data"
-            >
-              <input
-                type="hidden"
-                name="bxajaxid"
-                id="bxajaxid_5d15b07c13f1658b7a203c18ef6931ae_8BACKi"
-                value="5d15b07c13f1658b7a203c18ef6931ae"
-              /><input type="hidden" name="AJAX_CALL" value="Y" /><input
-                type="hidden"
-                name="sessid"
-                id="sessid"
-                value="d950fd4c4cb4386e2f4acc16c9e1247e"
-              /><input type="hidden" name="WEB_FORM_ID" value="32" />
-              <!--<h3>Поступай правильно</h3>-->
-
-              <div class="form-table data-table">
-                <div class="form-item">
-                  <div class="form-tag">
-                    Email
-                    <font color="red"
-                      ><span class="form-required starrequired">*</span></font
-                    >
-                  </div>
-
-                  <div class="form-input">
-                    <input
-                      type="text"
-                      class="inputtext"
-                      name="form_email_380"
-                      value=""
-                      size="0"
-                    />
-                  </div>
-                </div>
-
-                <div class="form-item">
-                  <div class="form-tag">
-                    Ваш вопрос
-                    <font color="red"
-                      ><span class="form-required starrequired">*</span></font
-                    >
-                  </div>
-
-                  <div class="form-input">
-                    <textarea
-                      name="form_textarea_381"
-                      cols="40"
-                      rows="5"
-                      class="inputtextarea"
-                    ></textarea>
-                  </div>
-                </div>
-
-                <!-- 						 -->
-
-                <div class="form-item">
-                  <div class="form-tag">
-                    Защита от автоматического заполнения
-                  </div>
-
-                  <input
-                    type="hidden"
-                    name="captcha_sid"
-                    value="0df1ad26a8d23330fb78942a9b249be4"
-                  /><img src="captcha.php" width="180" height="40" />
-                </div>
-
-                <div class="form-item">
-                  <div class="form-tag">
-                    Введите символы с картинки<font color="red"
-                      ><span class="form-required starrequired">*</span></font
-                    >
-                  </div>
-                  <div class="form-input">
-                    <input
-                      type="text"
-                      name="captcha_word"
-                      size="30"
-                      maxlength="50"
-                      value=""
-                      class="inputtext"
-                    />
-                  </div>
-                </div>
-
-                <p>
-                  <font color="red"
-                    ><span class="form-required starrequired">*</span></font
-                  >
-                  - обязательные поля
-                </p>
-
-                <input
-                  type="submit"
-                  name="web_form_submit"
-                  value="Задать вопрос"
-                  class="form-submit"
-                  id="send-form"
-                />
-              </div>
-            </form>
-            <!--'end_frame_cache_4enrz3'-->
-
-            <!--'end_frame_cache_fW13iv'-->
+          <div class="task">
+            <div><span>Номер задачи</span> Описание задачи (с одним вариантом ответа из предложенных)</div>
+            <div>Варианты ответа:
+              <checkbox>
+                <input type="radio" name="variant" value="Вариант 1">Венгрия
+                <input type="radio" name="variant" value="Вариант 1">Словакия
+                <input type="radio" name="variant" value="Вариант 1">Румыния
+              </checkbox>
+            </div>
           </div>
+          <div class="task">
+            <div><span>Номер задачи</span> Описание задачи (множество ответов )</div>
+            <div>Варианты ответа</div>
+            <checkbox>
+              <input type="checkbox" name="variant" value="Вариант 1">Венгрия
+              <input type="checkbox" name="variant" value="Вариант 1">Словакия
+              <input type="checkbox" name="variant" value="Вариант 1">Румыния
+            </checkbox>
+          </div>
+          <div class="task">
+            <div><span>Номер задачи</span> Описание задачи (соответствие)</div>
+            <div>Варианты ответа:
+            </div>
+            <div>Варианты ответа 2</div>
+            <input>
+          </div>
+        <button type='submit' class="btn">Проверить</button>
+    </form>
+   
+
+  </div>
         </div>
       </div>
     </div>
-
-    <!-- Вызов модального окна по клику на кнопку "Начать обучение" -->
-    <div class="overlay">
-      <div class="modal" id="modal1">
-        <a class="btn close-modal" data-modal="#modal1" href="#"></a>
-        <div class="content">
-          <h2>Получите консультацию ЮГУ, направив заявку</h2>
-
-          <!--'start_frame_cache_LRbDtM'-->
-
-          <form
-            name="start_learning"
-            action="/"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-            <input
-              type="hidden"
-              name="sessid"
-              id="sessid_1"
-              value="d950fd4c4cb4386e2f4acc16c9e1247e"
-            /><input type="hidden" name="WEB_FORM_ID" value="7" />
-            <!--<h3>Получите консультацию ЮГУ, направив заявку</h3>-->
-
-            <div class="form-table data-table">
-              <div class="form-item">
-                <div class="form-tag">
-                  Имя
-                  <font color="red"
-                    ><span class="form-required starrequired">*</span></font
-                  >
-                </div>
-
-                <div class="form-input">
-                  <input
-                    type="text"
-                    class="inputtext"
-                    name="form_text_81"
-                    value=""
-                  />
-                </div>
-              </div>
-
-              <div class="form-item">
-                <div class="form-tag">
-                  Телефон
-                  <font color="red"
-                    ><span class="form-required starrequired">*</span></font
-                  >
-                </div>
-
-                <div class="form-input">
-                  <input
-                    type="text"
-                    class="inputtext"
-                    name="form_text_84"
-                    value=""
-                  />
-                </div>
-              </div>
-
-              <div class="form-item">
-                <div class="form-tag">Я являюсь представителем организации</div>
-
-                <div class="form-input">
-                  <input
-                    type="checkbox"
-                    id="83"
-                    name="form_checkbox_org[]"
-                    value="83"
-                  /><label for="83">Я являюсь представителем организации</label>
-                </div>
-              </div>
-
-              <div class="form-item">
-                <div class="form-tag">
-                  Меня интересует следующий вопрос, связанный с
-                </div>
-
-                <div class="form-input">
-                  <label
-                    ><input
-                      type="radio"
-                      id="75"
-                      name="form_radio_q1"
-                      value="75" /></label
-                  ><label for="75"
-                    >поступлением на программы
-                    бакалаврита/специалитета/магистратуры</label
-                  ><br /><label
-                    ><input
-                      type="radio"
-                      id="76"
-                      name="form_radio_q1"
-                      value="76" /></label
-                  ><label for="76">поступлением в аспирантуру</label
-                  ><br /><label
-                    ><input
-                      type="radio"
-                      id="77"
-                      name="form_radio_q1"
-                      value="77" /></label
-                  ><label for="77"
-                    >обучением по программам дополнительного профессионального
-                    образования</label
-                  ><br /><label
-                    ><input
-                      type="radio"
-                      id="78"
-                      name="form_radio_q1"
-                      value="78" /></label
-                  ><label for="78"
-                    >занятиями по спорту, физической культуре,
-                    тренировкам</label
-                  ><br /><label
-                    ><input
-                      type="radio"
-                      id="79"
-                      name="form_radio_q1"
-                      value="79" /></label
-                  ><label for="79">научными исследованиями и разработками</label
-                  ><br /><label
-                    ><input
-                      type="radio"
-                      id="82"
-                      name="form_radio_q1"
-                      value="82" /></label
-                  ><label for="82"
-                    >другие вопросы (бухгалтерией и оплатой услуг ВУЗа,
-                    технической поддержкой в сфере ИТ)
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-item">
-                <div class="form-tag">
-                  Если необходимо, оставьте дополнительную информацию
-                </div>
-
-                <div class="form-input">
-                  <textarea
-                    name="form_textarea_85"
-                    cols="40"
-                    rows="5"
-                    class="inputtextarea"
-                  ></textarea>
-                </div>
-              </div>
-
-              <div class="form-item">
-                <div class="form-tag">
-                  Адресант
-                  <font color="red"
-                    ><span class="form-required starrequired">*</span></font
-                  >
-                </div>
-
-                <div class="form-input">
-                  <input
-                    type="text"
-                    class="inputtext"
-                    name="form_text_80"
-                    value=""
-                  />
-                </div>
-              </div>
-
-              <div class="form-item">
-                <div class="form-tag">
-                  Согласие
-                  <font color="red"
-                    ><span class="form-required starrequired">*</span></font
-                  >
-                </div>
-
-                <div class="form-input">
-                  <input
-                    type="checkbox"
-                    checked=""
-                    id="86"
-                    name="form_checkbox_sogl[]"
-                    value="86"
-                  /><label for="86"
-                    >Согласен на обработку персональных данных и согласен с
-                    политикой конфиденциальности и согласен с получением
-                    информационных рассылок от ФГБОУ ВО «Югорский
-                    государственный университет»</label
-                  >
-                </div>
-              </div>
-
-              <div class="quest-item">
-                <div class="html-quest">
-                  <input
-                    type="checkbox"
-                    id="86"
-                    class="form_checkbox_pers_data"
-                    name="form_checkbox_sogl[]"
-                    value="86"
-                    checked=""
-                  />
-                  <label for="86">
-                    Я ознакомился с
-                    <a
-                      href="/local/templates/yugu2021/components/bitrix/form.result.new/start-learning/soglasie.pdf"
-                      target="_blank"
-                      >Положением о защите персональных данных в ЮГУ</a
-                    >
-                    и даю согласие на обработку моих персональных данных
-                  </label>
-                </div>
-              </div>
-
-              <br />
-
-              <p>
-                <font color="red"
-                  ><span class="form-required starrequired">*</span></font
-                >
-                - обязательные поля
-              </p>
-
-              <input
-                type="submit"
-                name="web_form_submit"
-                value="Получить консультацию"
-                class="form-submit"
-                id="send-form"
-              />
-            </div>
-          </form>
-          <!--'end_frame_cache_LRbDtM'-->
-        </div>
-      </div>
-    </div>
-
-    <div class="section-nav-box">
-      <div class="container">
-        <div class="row">
-          <!-- <a href="https://lka.ugrasu.ru/auth/login"
-                   class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box">
-                    <div class="section-nav-item">
-                        <div class="section-nav-count">01</div>
-                        <div class="section-nav-name">Подать документы</div>
-                    </div>
-                </a> -->
-          <?php 
-                // session_start();
-                $subjects = ["Русский язык", "История",  "География", "Иностранный язык", "Литература", "Химия", "Физика", "Биология", "Физическая культура", "Обществознание", "Математика", "Информатика и ИКТ"];
-                $id = "form";
-
-                for ($i = 0; $i < 12; $i++) {
-                    $new_id = $id.$i;
-                    ?>
-                    <a
-                        href="#" class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box" onclick="document.getElementById('<?php echo $new_id ?>').submit()">
-                        <form action="session.php" method="post" id="<?php echo $new_id ?>">
-                            <input type="hidden" value="<?php echo $subjects[$i] ?>" name="subject">
-                            <div class="section-nav-item">
-                                <div class="section-nav-count"><?php echo $i + 1 ?></div>
-                                <div class="section-nav-name"><?php echo $subjects[$i] ?></div>
-                            </div>
-                        </form>
-                    </a>
-            <?php
-                }
-            ?>
-
-          <!-- <a
-            href="ITandIKT.php"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">01</div>
-              <div class="section-nav-name">Русский язык</div>
-            </div>
-          </a>
-
-          <a
-            href="/university/education/higher-education/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">02</div>
-              <div class="section-nav-name">История</div>
-            </div>
-          </a>
-
-          <a
-            href="/university/education/higher-education/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">03</div>
-              <div class="section-nav-name">География</div>
-            </div>
-          </a>
-
-          <a
-            href="/university/education/higher-education/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">04</div>
-              <div class="section-nav-name">Иностранный язык</div>
-            </div>
-          </a>
-
-          <a
-            href="/university/education/higher-education/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">05</div>
-              <div class="section-nav-name">Литература</div>
-            </div>
-          </a>
-
-          <a
-            href="/university/education/higher-education/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">06</div>
-              <div class="section-nav-name">Химия</div>
-            </div>
-          </a>
-
-          <a
-            href="/university/education/higher-education/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">07</div>
-              <div class="section-nav-name">Физика</div>
-            </div>
-          </a>
-
-          <a
-            href="/university/education/higher-education/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">08</div>
-              <div class="section-nav-name">Биология</div>
-            </div>
-          </a>
-
-          <a
-            href="/university/education/higher-education/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">09</div>
-              <div class="section-nav-name">Физческая культура</div>
-            </div>
-          </a>
-
-          <a
-            href="/enrollee/calculator-use/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">10</div>
-              <div class="section-nav-name">Обществознание</div>
-            </div>
-          </a>
-
-          <a
-            href="/enrollee/schoolboy/vysshee-obrazovanie/"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">11</div>
-              <div class="section-nav-name">Математика</div>
-            </div>
-          </a>
-
-          <a
-            href="https://rutube.ru/video/4b09f2dff89496dbd6ca1a8eb00622a4/"
-            tatget="_blank"
-            class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
-          >
-            <div class="section-nav-item">
-              <div class="section-nav-count">12</div>
-              <div class="section-nav-name">Информатика и ИКТ</div>
-            </div>
-          </a> -->
-
-          <!-- <a href="https://itport.ugrasu.ru/abiturient#/"
-                   class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box">
-                    <div class="section-nav-item">
-                        <div class="section-nav-count">02</div>
-                        <div class="section-nav-name">Списки поступающих и конкурсные списки</div>
-                    </div>
-                </a>
-
-                <a href="/enrollee/docs/postupayushchemu/"
-                   class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box">
-                    <div class="section-nav-item">
-                        <div class="section-nav-count">03</div>
-                        <div class="section-nav-name">Информация для поступающих</div>
-                    </div>
-                </a>
-
-                <a href="/enrollee/enrollment-orders/"
-                   class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box">
-                    <div class="section-nav-item">
-                        <div class="section-nav-count">04</div>
-                        <div class="section-nav-name">Списки зачисленных</div>
-                    </div>
-                </a> -->
-
-          <!--  <a href="tel:+73467377037" class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box phone">
-					 <div class="section-nav-item">
-						 <div class="section-nav-count">+7 (3467) 377-037</div>
-						 <div class="section-nav-name">По вопросам поступления</div>
-					 </div>
-				</a> -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Слайдер баннеров / -->
-
-    <!-- Слайдер фотографий / -->
-
-    <!-- Университет в цифрах / -->
-
-    <!-- Наши сервисы / -->
-
-    <!-- Присоединяйся к ЮГУ / -->
-
-    <!-- <div class="feedback-main">
-		    </div> -->
-
-    <!--          -->
-
-    <!-- Здесь подключаем скрипт, отвечающий за спойлер (показать/скрыть) блок -->
 
     <footer>
       <div class="footer-content">
@@ -1895,7 +1356,7 @@
                   border="0"
                   height="31"
                   width="88"
-                  alt="�&nbsp;ейтинг@Mail.ru"
+                  alt="Рейтинг@Mail.ru"
                 />
               </a>
               <!-- //Rating@Mail.ru logo -->
