@@ -1159,36 +1159,74 @@
     <h2 >Вариант 1</h2>
     <form action="check.php" method='post'>
           <div class="task">
-            <div><span>Номер задачи</span> Описание задачи (задача в которой просто ответ в input)</div>
+            <div class="menu-cat"><span>1.</span> Описание задачи (задача в которой просто ответ в input)</div>
             <input>
-          </div>
+          </div> 
           <div class="task">
-            <div><span>Номер задачи</span> Описание задачи (с одним вариантом ответа из предложенных)</div>
-            <div>Варианты ответа:
-              <checkbox>
-                <input type="radio" name="variant" value="Вариант 1">Венгрия
-                <input type="radio" name="variant" value="Вариант 1">Словакия
-                <input type="radio" name="variant" value="Вариант 1">Румыния
+            <div class="menu-cat"><span>2.</span> Описание задачи (с одним вариантом ответа из предложенных)</div>
+              <checkbox class="block-options">
+              <div>
+                              <input type="radio" name="variant" value="Вариант 1">Венгрия
+              </div>
+              <div>
+                              <input type="radio" name="variant" value="Вариант 1">Венгрия
+              </div>
+              <div>
+                              <input type="radio" name="variant" value="Вариант 1">Венгрия
+              </div>
               </checkbox>
-            </div>
           </div>
           <div class="task">
-            <div><span>Номер задачи</span> Описание задачи (множество ответов )</div>
-            <div>Варианты ответа</div>
-            <checkbox>
-              <input type="checkbox" name="variant" value="Вариант 1">Венгрия
-              <input type="checkbox" name="variant" value="Вариант 1">Словакия
-              <input type="checkbox" name="variant" value="Вариант 1">Румыния
+            <div class="menu-cat"><span>3.</span> Описание задачи (множество ответов )</div>
+            <checkbox class="block-options">
+              <div>
+                              <input type="checkbox" name="variant" value="Вариант 1">Венгрия
+              </div>
+              <div>
+                              <input type="checkbox" name="variant" value="Вариант 1">Венгрия
+              </div>
+              <div>
+                              <input type="checkbox" name="variant" value="Вариант 1">Венгрия
+              </div>
             </checkbox>
           </div>
           <div class="task">
-            <div><span>Номер задачи</span> Описание задачи (соответствие)</div>
-            <div>Варианты ответа:
-            </div>
-            <div>Варианты ответа 2</div>
+            <div class="menu-cat"><span>4.</span> Описание задачи (соответствие)</div>
+            <div class="list-variant">
+              <div class="block-options">
+                <div class="list-title">Заголовок</div>
+                <div >Варианты ответа:</div>
+                <div >Варианты ответа:</div>
+                <div >Варианты ответа:</div>
+                <div >Варианты ответа:</div>
+                <div >Варианты ответа:</div>
+              </div>
+              <div>
+                <div class="list-title">Заголовок</div>
+                <div >Варианты ответа 2</div>     
+                <div >Варианты ответа 2</div>
+              </div>
+          </div>
             <input>
           </div>
-        <button type='submit' class="btn">Проверить</button>
+          <div class="task">
+            <div class="menu-cat"><span>5.</span> Описание задачи (картинка)</div>
+            <div class="list-variant">
+              <div class="block-options">
+                <div class="list-title">Заголовок</div>
+                <div >Варианты ответа:</div>
+                <div >Варианты ответа:</div>
+                <div >Варианты ответа:</div>
+                <div >Варианты ответа:</div>
+                <div >Варианты ответа:</div>
+              </div>
+              <div class="block-options">
+                <img alt="pictures" src="images\1ixemwmr2a7rmofl5ib8agonqs5xqolp.jpg">
+              </div>
+          </div>
+            <input>
+          </div>
+        <div style = "display:flex; justify-content:center;"><button type='submit' class="btn">Проверить</button></div>
     </form>
    
 
