@@ -1741,7 +1741,7 @@
                 Делитесь новостями об университете с хештегом #ЮГУ
               </div>
 
-              <a href="/sveden/common/" class="link-sveden"
+              <a href="https://sveden.ugrasu.ru/sveden/common/" class="link-sveden"
                 >Сведения об образовательной организации</a
               >
             </div>
@@ -1768,32 +1768,32 @@
 
               <div class="foot-menu">
                 <div class="block-menu">
-                  <a href="/university/" class="menu-cat">Университет</a>
+                  <a href="https://www.ugrasu.ru/university/" class="menu-cat">Университет</a>
                 </div>
 
                 <div class="block-menu">
-                  <a href="/enrollee/" class="menu-cat">Поступающему</a>
+                  <a href="https://www.ugrasu.ru/enrollee/" class="menu-cat">Поступающему</a>
                 </div>
 
                 <div class="block-menu">
-                  <a href="/student/" class="menu-cat">Студенту</a>
+                  <a href="https://www.ugrasu.ru/student/" class="menu-cat">Студенту</a>
                 </div>
 
                 <div class="block-menu">
-                  <a href="/to-employee/" class="menu-cat">Сотруднику</a>
+                  <a href="https://www.ugrasu.ru/to-employee/" class="menu-cat">Сотруднику</a>
                 </div>
               </div>
 
               <div class="section-foot-menu">
                 <a
-                  href="/university/university/internet-reception/"
+                  href="https://www.ugrasu.ru/university/university/internet-reception/"
                   class="menu-link"
                 >
                   Обращения граждан
                 </a>
 
                 <a
-                  href="/forms/information-period-study/"
+                  href="https://www.ugrasu.ru/forms/information-period-study/"
                   class="menu-link"
                   target="_blank"
                 >
@@ -1801,7 +1801,7 @@
                 </a>
 
                 <a
-                  href="/university/university/integrated-security/anti-corruption/"
+                  href="https://www.ugrasu.ru/university/university/integrated-security/anti-corruption/"
                   class="menu-link"
                   target="_blank"
                 >
