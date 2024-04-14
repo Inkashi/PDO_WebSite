@@ -1190,10 +1190,32 @@
     <h2>Пройти тестирование</h2>
     <div class="test-list">
       <ul>
-        <li><a href="variant.php" class="variant"><div>1</div>Вариант</a></li>
-        <li><a href="variant.php" class="variant" ><div>2</div>Вариант</a></li>
-        <li><a href="variant.php"class="variant"><div>3</div>Вариант</a></li>
-        <li><a href="variant.php"class="variant"><div>n</div>Вариант</a></li>
+        <?php
+            $sql = "SELECT * FROM variants WHERE subject_id = '$id'";
+            $result = $link->query($sql);
+            
+            foreach ($result as $row) {
+                $number = $row['number'];
+                $variant_id = $row['id'];
+        ?>
+                <li>
+                    <a href="#" onclick="document.getElementById('var_form').submit()" class="variant">
+                        <form action="session_var.php" method="post" id="var_form">
+                            <div><?php echo $number ?></div>
+                            <input type="hidden" value="<?php echo $variant_id ?>" name="variant_id">
+                            <input type="hidden" value="<?php echo $number ?>" name="number">
+                        </form>
+                        Вариант
+                    </a>
+                </li>
+        <?php
+            }
+        ?>
+
+        <!-- <li><a href="variant.php" class="variant"><div>1</div>Вариант</a></li>
+        <li><a href="variant.php" class="variant"><div>2</div>Вариант</a></li>
+        <li><a href="variant.php" class="variant"><div>3</div>Вариант</a></li>
+        <li><a href="variant.php" class="variant"><div>n</div>Вариант</a></li> -->
       </ul>
 
 

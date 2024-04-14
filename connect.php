@@ -1,2 +1,2 @@
 <?php
-$link = mysqli_connect("127.0.0.1", "root", "", "pdo");
+$link = mysqli_connect("192.168.0.8", "root", "", "pdo");

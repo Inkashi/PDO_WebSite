@@ -1,8 +1,6 @@
 <?php 
   session_start();
   require 'connect.php';
-  $query = "SELECT * FROM exercises WHERE subject = 'History' and variant = 1";
-  $stmt = mysqli_query($link, $query);
 ?>
 
 <!DOCTYPE html>
@@ -1145,7 +1143,7 @@
           <div class="bread">
             <div class="bread-item"><a href="index.php"><span>Главная</span></a><i></i></div>
             <div class="bread-item"> <a href="ITandIKT.php" class="bread-item"><span><?php echo $_SESSION['subject'] ?></span></a><i></i></div>
-            <div class="bread-item"> <a href="Variant.php" class="bread-item"><span>Вариант</span></a></div>
+            <div class="bread-item"> <a href="Variant.php" class="bread-item"><span><?php echo $_SESSION['number'] ?> Вариант</span></a></div>
           </div>
           <!-- <a href="/directory/" class="hbottom-btn btn-directory">
                     <span>Справочник</span>
@@ -1156,12 +1154,88 @@
       <div class="back-font">Русский язык</div>
     </header>
   <div class="container">
-    <h2 >Вариант 1</h2>
+    <h2 >Вариант <?php echo $_SESSION['number'] ?></h2>
     <form action="check.php" method='post'>
+      <style>
+        .menu-cat {
+          color: #000 !important;
+        }
+      </style>
+      <?php
+        $variant_id = $_SESSION["variant_id"];
+        $sql = "SELECT * FROM exercises WHERE variant_id = $variant_id";
+        $result = $link->query($sql);
+        $counter = 1;
+        foreach ($result as $row) {
+          $id = $row['id'];
+          $type = $row['type'];
+          $title = $row['title'];
+          if ($type == "input") {
+
+          }
+          else if ($type == "variant") {
+            $v1 = $row['v1'];
+            $v2 = $row['v2'];
+            $v3 = $row['v3'];
+            $v4 = $row['v4'];
+      ?>
+            <div class="task">
+              <div class="menu-cat"><span><?php echo $counter.". " ?></span><?php echo $title ?></div>
+                <checkbox class="block-options">
+                <div>
+                                <input type="radio" name="<?php echo $id ?>" value="1"><?php echo $v1 ?>
+                </div>
+                <div>
+                                <input type="radio" name="<?php echo $id ?>" value="2"><?php echo $v2 ?>
+                </div>
+                <div>
+                                <input type="radio" name="<?php echo $id ?>" value="3"><?php echo $v3 ?>
+                </div>
+                <div>
+                                <input type="radio" name="<?php echo $id ?>" value="4"><?php echo $v4 ?>
+                </div>
+                </checkbox>
+            </div>
+      <?php
+            }
+            else if ($type == "photo_variant") {
+              $img = $row['photo'];
+              $v1 = $row['v1'];
+              $v2 = $row['v2'];
+              $v3 = $row['v3'];
+              $v4 = $row['v4'];
+      ?>
+              <div class="task">
+                <div class="menu-cat"><span><?php echo $counter.". " ?></span><?php echo $title ?></div>
+                <div class="list-variant">
+                  <checkbox class="block-options">
+                    <div>
+                                    <input type="radio" name="<?php echo $id ?>" value="1"><?php echo $v1 ?>
+                    </div>
+                    <div>
+                                    <input type="radio" name="<?php echo $id ?>" value="2"><?php echo $v2 ?>
+                    </div>
+                    <div>
+                                    <input type="radio" name="<?php echo $id ?>" value="3"><?php echo $v3 ?>
+                    </div>
+                    <div>
+                                    <input type="radio" name="<?php echo $id ?>" value="4"><?php echo $v4 ?>
+                    </div>
+                  </checkbox>
+                    <img alt="pictures" src="<?php echo $img ?>">
+                  </div>
+                </div>
+              </div>
+      <?php
+          }
+
+          $counter++;
+        }
+      ?>
           <div class="task">
             <div class="menu-cat"><span>1.</span> Описание задачи (задача в которой просто ответ в input)</div>
             <input>
-          </div> 
+          </div>
           <div class="task">
             <div class="menu-cat"><span>2.</span> Описание задачи (с одним вариантом ответа из предложенных)</div>
               <checkbox class="block-options">

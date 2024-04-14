@@ -1,17 +1,25 @@
 <?php
+session_start();
 require 'connect.php';
-$form_data = $_POST;
-$stmt = "SELECT answer FROM exercises WHERE subject = 'History' and variant=1";
-$query = mysqli_query($link, $stmt);
-$result = mysqli_fetch_all($query);
 
-$flag = true;
-for($i = 0; $i<count($result);$i++)
-{
-    if ($result[$i][0] !== $form_data[$i])
-    {
-        $flag = false;
-    }
+$variant_id = $_SESSION["variant_id"];
+$form_data = $_POST;
+
+$sql = "SELECT id, answer FROM exercises WHERE variant_id = $variant_id";
+$result = $link->query($sql);
+
+$_SESSION["answers"] = [];
+
+foreach ($result as $row) {
+	$id = $row['id'];
+	$answer = $row['answer'];
+
+	if ($answer != $form_data[$id]) {
+		$_SESSION["answers"][$id] = 0;
+	}
+	else {
+		$_SESSION["answers"][$id] = 1;
+	}
 }
-if ($flag)
-    print_r('1');
+
+header("Location: variant.php");
