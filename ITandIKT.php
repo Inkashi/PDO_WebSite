@@ -1151,7 +1151,7 @@
         </div>
       </div>
 
-      <div class="back-font">Русский язык</div>
+      <div class="back-font"><?php echo $_SESSION['subject']?></div>
     </header>
   <div class="container">
     <h2 >Специальности</h2>

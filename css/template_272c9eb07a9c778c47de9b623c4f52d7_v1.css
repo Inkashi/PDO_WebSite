@@ -12639,7 +12639,7 @@ footer .foot-menu .block-menu .menu-cat {
 div .menu-cat{
   font-weight: 600;
 	font-size: 20px;
-	color: #fff !important;
+	color: #fff ;
 	text-decoration: none !important;
 }
 

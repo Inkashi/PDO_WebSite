@@ -1151,7 +1151,7 @@
         </div>
       </div>
 
-      <div class="back-font">Русский язык</div>
+      <div class="back-font"><?php echo $_SESSION['subject']?></div>
     </header>
 
 
@@ -1224,17 +1224,21 @@
                                     <input type="radio" name="<?php echo $id ?>" value="4"><?php echo $v4 ?>
                     </div>
                   </checkbox>
+                  <div class="block-options">
                     <img alt="pictures" src="<?php echo $img ?>">
                   </div>
+                  </div>
                 </div>
-              </div>
+              
       <?php
           }
 
           $counter++;
         }
       ?>
-          <div class="task">
+    </form>
+    </div>
+          <!-- <div class="task">
             <div class="menu-cat"><span>1.</span> Описание задачи (задача в которой просто ответ в input)</div>
             <input>
           </div>
@@ -1301,9 +1305,8 @@
               </div>
           </div>
             <input>
-          </div>
+          </div> -->
         <div style = "display:flex; justify-content:center;"><button type='submit' class="btn">Проверить</button></div>
-    </form>
    
 
   </div>
