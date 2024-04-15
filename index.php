@@ -242,7 +242,7 @@
                     </li>
 
                     <li>
-                      <a href="/sveden/common/"
+                      <a href="https://sveden.ugrasu.ru/sveden/common/"
                         >Сведения об образовательной организации</a
                       >
                     </li>
@@ -1542,9 +1542,30 @@
                         <div class="section-nav-name">Подать документы</div>
                     </div>
                 </a> -->
+          <?php 
+                // session_start();
+                $subjects = ["Русский язык", "История",  "География", "Иностранный язык", "Литература", "Химия", "Физика", "Биология", "Физическая культура", "Обществознание", "Математика", "Информатика и ИКТ"];
+                $id = "form";
 
-          <a
-            href="ITandIKT.html"
+                for ($i = 0; $i < 12; $i++) {
+                    $new_id = $id.$i;
+                    ?>
+                    <a
+                        href="#" class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box" onclick="document.getElementById('<?php echo $new_id ?>').submit()">
+                        <form action="session.php" method="post" id="<?php echo $new_id ?>">
+                            <input type="hidden" value="<?php echo $subjects[$i] ?>" name="subject">
+                            <div class="section-nav-item">
+                                <div class="section-nav-count"><?php echo $i + 1 ?></div>
+                                <div class="section-nav-name"><?php echo $subjects[$i] ?></div>
+                            </div>
+                        </form>
+                    </a>
+            <?php
+                }
+            ?>
+
+          <!-- <a
+            href="ITandIKT.php"
             class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box"
           >
             <div class="section-nav-item">
@@ -1662,7 +1683,7 @@
               <div class="section-nav-count">12</div>
               <div class="section-nav-name">Информатика и ИКТ</div>
             </div>
-          </a>
+          </a> -->
 
           <!-- <a href="https://itport.ugrasu.ru/abiturient#/"
                    class="col-xs-6 col-md-6 col-sm-6 col-lg-4 col-xl-3 section-nav-item-box">
@@ -1774,7 +1795,7 @@
                 Делитесь новостями об университете с хештегом #ЮГУ
               </div>
 
-              <a href="/sveden/common/" class="link-sveden"
+              <a href="https://sveden.ugrasu.ru/sveden/common/" class="link-sveden"
                 >Сведения об образовательной организации</a
               >
             </div>
@@ -1794,43 +1815,39 @@
                   target="_blank"
                   class="minobr"
                 >
-                  Министерство науки и высшего образования �&nbsp;оссийской
+                  Министерство науки и высшего образования Российской
                   Федерации
                 </a>
               </div>
 
               <div class="foot-menu">
                 <div class="block-menu">
-                  <a href="/university/" class="menu-cat">Университет</a>
+                  <a href="https://www.ugrasu.ru/university/" class="menu-cat">Университет</a>
                 </div>
 
                 <div class="block-menu">
-                  <a href="/enrollee/" class="menu-cat">Поступающему</a>
+                  <a href="https://www.ugrasu.ru/enrollee/" class="menu-cat">Поступающему</a>
                 </div>
 
                 <div class="block-menu">
-                  <a href="/student/" class="menu-cat">Студенту</a>
+                  <a href="https://www.ugrasu.ru/student/" class="menu-cat">Студенту</a>
                 </div>
 
                 <div class="block-menu">
-                  <a href="/to-employee/" class="menu-cat">Сотруднику</a>
+                  <a href="https://www.ugrasu.ru/to-employee/" class="menu-cat">Сотруднику</a>
                 </div>
               </div>
 
               <div class="section-foot-menu">
-                <a class="special_v" href="/?special_version=Y" rel="nofollow">
-                  <span>Версия для слабовидящих</span>
-                </a>
-
                 <a
-                  href="/university/university/internet-reception/"
+                  href="https://www.ugrasu.ru/university/university/internet-reception/"
                   class="menu-link"
                 >
                   Обращения граждан
                 </a>
 
                 <a
-                  href="/forms/information-period-study/"
+                  href="https://www.ugrasu.ru/forms/information-period-study/"
                   class="menu-link"
                   target="_blank"
                 >
@@ -1838,7 +1855,7 @@
                 </a>
 
                 <a
-                  href="/university/university/integrated-security/anti-corruption/"
+                  href="https://www.ugrasu.ru/university/university/integrated-security/anti-corruption/"
                   class="menu-link"
                   target="_blank"
                 >
