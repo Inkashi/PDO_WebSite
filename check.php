@@ -21,8 +21,10 @@ if (!$_SESSION["try_again"]) {
         $answer = $row['answer'];
         $points = $row['points'];
 
-        if (!isset($form_data[$id]))
+        if (!isset($form_data[$id])){
+            $_SESSION["answers"][$id] = 0;
             continue;
+        }
 
         if ($answer != $form_data[$id]) {
             $_SESSION["answers"][$id] = 0;
