@@ -899,7 +899,7 @@ require 'connect.php';
                                         }
                                         ?></span><?php echo $title ?></div>
             <input type = "text" name="<?php echo $id ?>" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
-                                              echo " disabled";
+                                              echo " disabled style='color:grey'";
                                             }
                                             if (!empty($_SESSION["data"][$id])) {
                                               echo " value='{$_SESSION['data'][$id]}'";
