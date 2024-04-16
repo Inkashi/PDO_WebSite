@@ -1186,8 +1186,8 @@
       </ul>
     </div>
     <h2>Программа подготовки</h2>
-    <div><a href="<?php echo $path ?>" class="doc-name" style="text-decoration: none; color: gray;">Документ PDF</a></div>
-    <h2>Пройти тестирование</h2>
+    <div class="doc-blink"><div class="doc-ico pdf"></div><a href="<?php echo $path ?>" class="doc-name" target="_blank" style="text-decoration: none; color: gray;"><?php echo $fullname ?></a></div>
+    <h2 style="margin-top: 50px">Пройти тестирование</h2>
     <div class="test-list">
       <ul>
         <?php
@@ -1201,11 +1201,10 @@
                 <li>
                     <a href="#" onclick="document.getElementById('var_form').submit()" class="variant">
                         <form action="session_var.php" method="post" id="var_form">
-                            <div><?php echo $number ?></div>
                             <input type="hidden" value="<?php echo $variant_id ?>" name="variant_id">
                             <input type="hidden" value="<?php echo $number ?>" name="number">
                         </form>
-                        Вариант
+                        Пройти тестирование
                     </a>
                 </li>
         <?php
@@ -1217,8 +1216,6 @@
         <li><a href="variant.php" class="variant"><div>3</div>Вариант</a></li>
         <li><a href="variant.php" class="variant"><div>n</div>Вариант</a></li> -->
       </ul>
-
-
     </div>
   
   </div>

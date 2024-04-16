@@ -11408,8 +11408,16 @@ header .header-bottom .nav-link-block  {
   column-count: 2;
 }
 
+.doc-blink{
+  border-radius: 5px;
+    padding: 12px 15px;
+    margin: -12px -15px;
+    transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
 .doc-name{
-  padding-left: 42px;
   width: 100%;
   line-height: 21px;
   color: grey !important;
@@ -13866,6 +13874,31 @@ footer .minobr:hover {
 	display: block;
 }
 
+.radio-btn{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px !important;
+  border: none;
+}
+
+.v1{
+  width:90% !important;
+}
+
+.doc-ico{
+  width: 42px;
+  height: 50px;
+  background-size: cover !important;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.pdf{
+  background: url(/images/pdf_ico.svg) no-repeat !important;
+  margin-left: 42px;
+}
+
 .list-slider .doc-list {
 	padding-left: 30px;
 }
@@ -13929,25 +13962,47 @@ footer .minobr:hover {
 }
 
 .task{
+  padding: 1%;
   margin-bottom: 3vh;
+  border-radius: 20px;
+  background-color: rgba(175, 238, 238,40%);
 }
+
+.task:nth-child(2n+1){
+  background-color: #e9eff7;
+}
+
 
 .task img{
   width: 100%;
   height: 30vh;
 }
 
+.radio-btn:checked{
+  accent-color: black;
+  align-content:end;
+}
+
+.radio-btn:active {
+  background-color: black;
+  color: black;
+  outline: 1px solid green;
+}
 
 .task input{
-  margin-top: 2vh;
-  background: #E7EEF4;
-	border-radius: 5px;
+  background: white;
+	border-radius: 20px;
 	font-weight: 600;
 	font-size: 18px;
 	color: #000;
 	padding: 10px 24px;
 	border: 0;
 	outline: none;
+}
+
+input[type="text"]{
+  margin: 1% 0 0 5%;
+  width: 80%;
 }
 
 .calculator-use .item-element .input::placeholder {
@@ -13988,10 +14043,8 @@ footer .minobr:hover {
 }
 
 .list-variant{
-  width: 80% !important;
   display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
   flex-direction: row;
 }
 
@@ -14004,6 +14057,13 @@ footer .minobr:hover {
   width: 40%;
   margin-left: 5%;
 }
+
+.block-options div{
+  margin-top: 2vh;
+  display: flex;
+  align-items: center;
+}
+
 
 .list-title{
   text-align: center;

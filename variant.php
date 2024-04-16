@@ -862,6 +862,10 @@ require 'connect.php';
 
   <div class="container">
     <h2>Вариант <?php echo $_SESSION['number'] ?></h2>
+    
+    <div><?php if (isset($_SESSION["points"]) && $_SESSION["try_again"] ) {
+              echo $_SESSION["points"] . " % / 100%";
+            }?> </div>
     <form action="check.php" method='post'>
       <style>
         .menu-cat {
@@ -873,7 +877,9 @@ require 'connect.php';
       $sql = "SELECT * FROM exercises WHERE variant_id = $variant_id";
       $result = $link->query($sql);
       $counter = 1;
-      print_r($_SESSION["answers"]);
+      if (!isset($_SESSION['try_again'])) {
+        $_SESSION['try_again'] = false;
+      }
       foreach ($result as $row) {
         $id = $row['id'];
         $type = $row['type'];
@@ -892,7 +898,7 @@ require 'connect.php';
                                           echo $counter . ". ";
                                         }
                                         ?></span><?php echo $title ?></div>
-            <input name="<?php echo $id ?>" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+            <input type = "text" name="<?php echo $id ?>" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                               echo " disabled";
                                             }
                                             if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 1) {
@@ -918,9 +924,9 @@ require 'connect.php';
                                           echo $counter . ". ";
                                         }
                                         ?></span><?php echo $title ?></div>
-            <checkbox class="block-options">
+            <checkbox class="block-options v1">
               <div>
-                <input type="radio" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+                <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 1) {
@@ -928,7 +934,7 @@ require 'connect.php';
                                                                         } ?>><?php echo $v1 ?>
               </div>
               <div>
-                <input type="radio" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+                <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 2) {
@@ -936,7 +942,7 @@ require 'connect.php';
                                                                         } ?>><?php echo $v2 ?>
               </div>
               <div>
-                <input type="radio" name="<?php echo $id ?>" value="3" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+                <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="3" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 3) {
@@ -944,7 +950,7 @@ require 'connect.php';
                                                                         } ?>><?php echo $v3 ?>
               </div>
               <div>
-                <input type="radio" name="<?php echo $id ?>" value="4" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+                <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="4" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 4) {
@@ -975,7 +981,7 @@ require 'connect.php';
             <div class="list-variant">
               <checkbox class="block-options">
                 <div>
-                  <input type="radio" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+                  <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
                                                                           if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 1) {
@@ -983,7 +989,7 @@ require 'connect.php';
                                                                           } ?>><?php echo $v1 ?>
                 </div>
                 <div>
-                  <input type="radio" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+                  <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
                                                                           if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 2) {
@@ -991,7 +997,7 @@ require 'connect.php';
                                                                           } ?>><?php echo $v2 ?>
                 </div>
                 <div>
-                  <input type="radio" name="<?php echo $id ?>" value="3" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+                  <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="3" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
                                                                           if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 3) {
@@ -999,7 +1005,7 @@ require 'connect.php';
                                                                           } ?>><?php echo $v3 ?>
                 </div>
                 <div>
-                  <input type="radio" name="<?php echo $id ?>" value="4" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+                  <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="4" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
                                                                           if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 4) {
@@ -1019,13 +1025,18 @@ require 'connect.php';
         $counter++;
       }
       ?>
-      <div style="display:flex; justify-content:center;"><button type='submit' class="btn">Проверить</button></div>
+      <div style="display:flex; justify-content:center;"><button type='submit' class="btn"><?php if ($_SESSION["try_again"] == false) {
+                                                                                              echo "Проверить";
+                                                                                            } else {
+                                                                                              echo "Попробовать еще раз";
+                                                                                            } ?></button></div>
     </form>
   </div>
   <?php
   $_SESSION["give_answers"] = false;
   $_SESSION["answers"] = [];
   $_SESSION["data"] = [];
+  $_SESSION["points"] = 0;
   ?>
   <!-- <div class="task">
             <div class="menu-cat"><span>1.</span> Описание задачи (задача в которой просто ответ в input)</div>
@@ -1212,7 +1223,7 @@ require 'connect.php';
           <div class="foot-banners-item">
             <!-- Rating@Mail.ru logo -->
             <a target="_blank" href="http://top.mail.ru/jump?from=1235539">
-              <img src="//top-fwz1.mail.ru/counter?id=1235539;t=479;l=1" border="0" height="31" width="88" alt="Рейтинг@Mail.ru" />
+              <img src="//top-fwz1.mail.ru/counter?id=1235539;t=479;l=1" style="border=: 0" height="31" width="88" alt="Рейтинг@Mail.ru" />
             </a>
             <!-- //Rating@Mail.ru logo -->
           </div>
@@ -1227,1066 +1238,6 @@ require 'connect.php';
       <img src="//top-fwz1.mail.ru/counter?id=1235539;js=na" style="border: 0" height="1" width="1" alt="Рейтинг@Mail.ru" />
     </div>
   </noscript>
-  <!-- //Rating@Mail.ru counter -->
-
-  <!-- sputnik.ru counter -->
-  <!-- //sputnik.ru counter -->
-
-  <!-- CLEANTALK template addon -->
-  <!--'start_frame_cache_cleantalk_frame'-->
-  <script data-skip-moving="true">
-    var ct_checkjs_val = "9f5385e6b6d668bc63cc8231d7797f70",
-      ct_date = new Date(),
-      ctTimeMs = new Date().getTime(),
-      ctMouseEventTimerFlag = true, //Reading interval flag
-      ctMouseData = [],
-      ctMouseDataCounter = 0;
-
-    function ctSetCookie(c_name, value) {
-      document.cookie = c_name + "=" + encodeURIComponent(value) + "; path=/";
-    }
-
-    ctSetCookie("ct_ps_timestamp", Math.floor(new Date().getTime() / 1000));
-    ctSetCookie("ct_fkp_timestamp", "0");
-    ctSetCookie("ct_pointer_data", "0");
-    ctSetCookie("ct_timezone", "0");
-
-    ct_attach_event_handler(window, "DOMContentLoaded", ct_ready);
-
-    setTimeout(function() {
-      ctSetCookie("ct_timezone", (ct_date.getTimezoneOffset() / 60) * -1);
-      ctSetCookie("ct_checkjs", ct_checkjs_val);
-    }, 1000);
-
-    /* Writing first key press timestamp */
-    var ctFunctionFirstKey = function output(event) {
-      var KeyTimestamp = Math.floor(new Date().getTime() / 1000);
-      ctSetCookie("ct_fkp_timestamp", KeyTimestamp);
-      ctKeyStopStopListening();
-    };
-
-    /* Reading interval */
-    var ctMouseReadInterval = setInterval(function() {
-      ctMouseEventTimerFlag = true;
-    }, 150);
-
-    /* Writting interval */
-    var ctMouseWriteDataInterval = setInterval(function() {
-      ctSetCookie("ct_pointer_data", JSON.stringify(ctMouseData));
-    }, 1200);
-
-    /* Logging mouse position each 150 ms */
-    var ctFunctionMouseMove = function output(event) {
-      if (ctMouseEventTimerFlag == true) {
-        ctMouseData.push([
-          Math.round(event.pageY),
-          Math.round(event.pageX),
-          Math.round(new Date().getTime() - ctTimeMs),
-        ]);
-
-        ctMouseDataCounter++;
-        ctMouseEventTimerFlag = false;
-        if (ctMouseDataCounter >= 100) {
-          ctMouseStopData();
-        }
-      }
-    };
-
-    /* Stop mouse observing function */
-    function ctMouseStopData() {
-      if (typeof window.addEventListener == "function") {
-        window.removeEventListener("mousemove", ctFunctionMouseMove);
-      } else {
-        window.detachEvent("onmousemove", ctFunctionMouseMove);
-      }
-      clearInterval(ctMouseReadInterval);
-      clearInterval(ctMouseWriteDataInterval);
-    }
-
-    /* Stop key listening function */
-    function ctKeyStopStopListening() {
-      if (typeof window.addEventListener == "function") {
-        window.removeEventListener("mousedown", ctFunctionFirstKey);
-        window.removeEventListener("keydown", ctFunctionFirstKey);
-      } else {
-        window.detachEvent("mousedown", ctFunctionFirstKey);
-        window.detachEvent("keydown", ctFunctionFirstKey);
-      }
-    }
-
-    if (typeof window.addEventListener == "function") {
-      window.addEventListener("mousemove", ctFunctionMouseMove);
-      window.addEventListener("mousedown", ctFunctionFirstKey);
-      window.addEventListener("keydown", ctFunctionFirstKey);
-    } else {
-      window.attachEvent("onmousemove", ctFunctionMouseMove);
-      window.attachEvent("mousedown", ctFunctionFirstKey);
-      window.attachEvent("keydown", ctFunctionFirstKey);
-    }
-    /* Ready function */
-    function ct_ready() {
-      ctSetCookie("ct_visible_fields", 0);
-      ctSetCookie("ct_visible_fields_count", 0);
-      setTimeout(function() {
-        for (var i = 0; i < document.forms.length; i++) {
-          var form = document.forms[i];
-          if (
-            form.action.toString().indexOf("/auth/?forgot_password") !== -1
-          ) {
-            continue;
-          }
-          form.onsubmit_prev = form.onsubmit;
-          form.onsubmit = function(event) {
-            /* Get only fields */
-            var elements = [];
-            for (var key in this.elements) {
-              if (!isNaN(+key)) elements[key] = this.elements[key];
-            }
-
-            /* Filter fields */
-            elements = elements.filter(function(elem) {
-              var pass = true;
-
-              /* Filter fields */
-              if (
-                getComputedStyle(elem).display === "none" || // hidden
-                getComputedStyle(elem).visibility === "hidden" || // hidden
-                getComputedStyle(elem).opacity === "0" || // hidden
-                elem.getAttribute("type") === "hidden" || // type == hidden
-                elem.getAttribute("type") === "submit" || // type == submit
-                elem.value === "" || // empty value
-                elem.getAttribute("name") === null
-              ) {
-                return false;
-              }
-
-              /* Filter elements with same names for type == radio */
-              if (elem.getAttribute("type") === "radio") {
-                elements.forEach(function(el, j, els) {
-                  if (elem.getAttribute("name") === el.getAttribute("name")) {
-                    pass = false;
-                    return;
-                  }
-                });
-              }
-
-              return true;
-            });
-
-            /* Visible fields count */
-            var visible_fields_count = elements.length;
-
-            /* Visible fields */
-            var visible_fields = "";
-            elements.forEach(function(elem, i, elements) {
-              visible_fields += " " + elem.getAttribute("name");
-            });
-            visible_fields = visible_fields.trim();
-
-            ctSetCookie("ct_visible_fields", visible_fields);
-            ctSetCookie("ct_visible_fields_count", visible_fields_count);
-
-            /* Call previous submit action */
-            if (event.target.onsubmit_prev instanceof Function) {
-              setTimeout(function() {
-                event.target.onsubmit_prev.call(event.target, event);
-              }, 500);
-            }
-          };
-        }
-      }, 1000);
-    }
-
-    function ct_attach_event_handler(elem, event, callback) {
-      if (typeof window.addEventListener === "function")
-        elem.addEventListener(event, callback);
-      else elem.attachEvent(event, callback);
-    }
-
-    function ct_remove_event_handler(elem, event, callback) {
-      if (typeof window.removeEventListener === "function")
-        elem.removeEventListener(event, callback);
-      else elem.detachEvent(event, callback);
-    }
-
-    if (typeof jQuery !== "undefined") {
-      /* Capturing responses and output block message for unknown AJAX forms */
-      jQuery(document).ajaxComplete(function(event, xhr, settings) {
-        if (xhr.responseText && xhr.responseText.indexOf('"apbct') !== -1) {
-          try {
-            var response = JSON.parse(xhr.responseText);
-            if (typeof response.apbct !== "undefined") {
-              response = response.apbct;
-              if (response.blocked) {
-                alert(response.comment);
-                if (+response.stop_script == 1) window.stop();
-              }
-            }
-          } catch (e) {
-            return;
-          }
-        }
-      });
-    }
-  </script>
-  <!--'end_frame_cache_cleantalk_frame'--><!-- /CLEANTALK template addon -->
-  <script>
-    if (!window.BX) window.BX = {};
-    if (!window.BX.message)
-      window.BX.message = function(mess) {
-        if (typeof mess === "object") {
-          for (let i in mess) {
-            BX.message[i] = mess[i];
-          }
-          return true;
-        }
-      };
-  </script>
-  <script>
-    (window.BX || top.BX).message({
-      JS_CORE_LOADING: "Загрузка...",
-      JS_CORE_NO_DATA: "- Нет данных -",
-      JS_CORE_WINDOW_CLOSE: "Закрыть",
-      JS_CORE_WINDOW_EXPAND: "Развернуть",
-      JS_CORE_WINDOW_NARROW: "Свернуть в окно",
-      JS_CORE_WINDOW_SAVE: "Сохранить",
-      JS_CORE_WINDOW_CANCEL: "Отменить",
-      JS_CORE_WINDOW_CONTINUE: "Продолжить",
-      JS_CORE_H: "ч",
-      JS_CORE_M: "м",
-      JS_CORE_S: "с",
-      JSADM_AI_HIDE_EXTRA: "Скрыть лишние",
-      JSADM_AI_ALL_NOTIF: "Показать все",
-      JSADM_AUTH_REQ: "Требуется авторизация!",
-      JS_CORE_WINDOW_AUTH: "Войти",
-      JS_CORE_IMAGE_FULL: "Полный размер",
-    });
-  </script>
-  <script src="js/core.min.js"></script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "main.core",
-      namespace: "BX",
-      loaded: true,
-    });
-  </script>
-  <script>
-    BX.setJSList([
-      "/bitrix/js/main/core/core_ajax.js",
-      "/bitrix/js/main/core/core_promise.js",
-      "/bitrix/js/main/polyfill/promise/js/promise.js",
-      "/bitrix/js/main/loadext/loadext.js",
-      "/bitrix/js/main/loadext/extension.js",
-      "/bitrix/js/main/polyfill/promise/js/promise.js",
-      "/bitrix/js/main/polyfill/find/js/find.js",
-      "/bitrix/js/main/polyfill/includes/js/includes.js",
-      "/bitrix/js/main/polyfill/matches/js/matches.js",
-      "/bitrix/js/ui/polyfill/closest/js/closest.js",
-      "/bitrix/js/main/polyfill/fill/main.polyfill.fill.js",
-      "/bitrix/js/main/polyfill/find/js/find.js",
-      "/bitrix/js/main/polyfill/matches/js/matches.js",
-      "/bitrix/js/main/polyfill/core/dist/polyfill.bundle.js",
-      "/bitrix/js/main/core/core.js",
-      "/bitrix/js/main/polyfill/intersectionobserver/js/intersectionobserver.js",
-      "/bitrix/js/main/lazyload/dist/lazyload.bundle.js",
-      "/bitrix/js/main/polyfill/core/dist/polyfill.bundle.js",
-      "/bitrix/js/main/parambag/dist/parambag.bundle.js",
-    ]);
-  </script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "ui.dexie",
-      namespace: "BX.Dexie3",
-      loaded: true,
-    });
-  </script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "ls",
-      namespace: "window",
-      loaded: true,
-    });
-  </script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "fx",
-      namespace: "window",
-      loaded: true,
-    });
-  </script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "fc",
-      namespace: "window",
-      loaded: true,
-    });
-  </script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "pull.protobuf",
-      namespace: "BX",
-      loaded: true,
-    });
-  </script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "rest.client",
-      namespace: "window",
-      loaded: true,
-    });
-  </script>
-  <script>
-    (window.BX || top.BX).message({
-      pull_server_enabled: "Y",
-      pull_config_timestamp: "0",
-      pull_guest_mode: "N",
-      pull_guest_user_id: "0",
-    });
-    (window.BX || top.BX).message({
-      PULL_OLD_REVISION: "Для продолжения корректной работы с сайтом необходимо перезагрузить страницу.",
-    });
-  </script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "pull.client",
-      namespace: "BX",
-      loaded: true,
-    });
-  </script>
-  <script>
-    BX.Runtime.registerExtension({
-      name: "pull",
-      namespace: "window",
-      loaded: true,
-    });
-  </script>
-  <script>
-    (window.BX || top.BX).message({
-      LANGUAGE_ID: "ru",
-      FORMAT_DATE: "DD.MM.YYYY",
-      FORMAT_DATETIME: "DD.MM.YYYY HH:MI:SS",
-      COOKIE_PREFIX: "BITRIX_SM",
-      SERVER_TZ_OFFSET: "18000",
-      UTF_MODE: "Y",
-      SITE_ID: "s1",
-      SITE_DIR: "/",
-      USER_ID: "",
-      SERVER_TIME: "1711439316",
-      USER_TZ_OFFSET: "0",
-      USER_TZ_AUTO: "Y",
-      bitrix_sessid: "d950fd4c4cb4386e2f4acc16c9e1247e",
-    });
-  </script>
-  <script src="js/kernel_main_v1.js"></script>
-  <script src="js/dexie3.bundle.min.js"></script>
-  <script src="js/core_ls.min.js"></script>
-  <script src="js/core_frame_cache.min.js"></script>
-  <script src="js/protobuf.min.js"></script>
-  <script src="js/model.min.js"></script>
-  <script src="js/rest.client.min.js"></script>
-  <script src="js/pull.client.min.js"></script>
-  <script>
-    BX.setJSList([
-      "/bitrix/js/main/core/core_fx.js",
-      "/bitrix/js/main/date/main.date.js",
-      "/bitrix/js/main/core/core_date.js",
-      "/bitrix/js/main/pageobject/pageobject.js",
-      "/bitrix/js/main/core/core_window.js",
-      "/bitrix/js/main/utils.js",
-      "/bitrix/js/main/core/core_tooltip.js",
-      "/bitrix/js/main/session.js",
-      "/local/templates/yugu2021/js/jquery-3.5.1.min.js",
-      "/local/templates/yugu2021/bootstrap/js/bootstrap.js",
-      "/local/templates/yugu2021/owl/owl.carousel.min.js",
-      "/local/templates/yugu2021/js/up.js",
-      "/local/templates/yugu2021/js/jquery.spincrement.min.js",
-      "/local/templates/yugu2021/js/jquery.waterwheelCarousel.min.js",
-      "/local/templates/yugu2021/js/modal.js",
-      "/local/templates/yugu2021/js/cookie-show.js",
-      "/local/templates/yugu2021/fancybox/jquery.fancybox.min.js",
-      "/local/templates/yugu2021/fancybox/fancybox.umd.js",
-      "/local/templates/yugu2021/js/parallax.min.js",
-      "/local/templates/yugu2021/tiny-slider/tiny-slider.js",
-      "/local/templates/yugu2021/components/bitrix/menu/yugu_multilevels/script.js",
-      "/bitrix/components/bitrix/search.title/script.js",
-    ]);
-  </script>
-  <script>
-    BX.setCSSList([
-      "/local/templates/yugu2021/components/bitrix/form.result.new/start-learning/style.css",
-      "/local/templates/yugu2021/components/bitrix/news.list/slider-banners/style.css",
-      "/local/templates/yugu2021/components/bitrix/news.list/news-list/style.css",
-      "/local/templates/yugu2021/components/bitrix/news.list/developments-list/style.css",
-      "/local/templates/yugu2021/components/bitrix/news.list/scientific-projects/style.css",
-      "/local/templates/yugu2021/bootstrap/css/bootstrap.css",
-      "/local/templates/yugu2021/owl/owl.carousel.min.css",
-      "/local/templates/yugu2021/fancybox/jquery.fancybox.min.css",
-      "/local/templates/yugu2021/fancybox/fancybox.min.css",
-      "/local/templates/yugu2021/tiny-slider/tiny-slider.css",
-      "/local/templates/yugu2021/components/bitrix/menu/yugu_multilevels/style.css",
-      "/local/templates/yugu2021/components/bitrix/search.title/search-in-menu/style.css",
-      "/local/templates/yugu2021/components/bitrix/search.title/search-header/style.css",
-      "/local/templates/yugu2021/components/bitrix/form/question-webform/bitrix/form.result.new/.default/style.css",
-      "/local/templates/yugu2021/template_styles.css",
-    ]);
-  </script>
-  <script type="text/javascript">
-    if (Intl && Intl.DateTimeFormat)
-      document.cookie =
-      "BITRIX_SM_TZ=" +
-      Intl.DateTimeFormat().resolvedOptions().timeZone +
-      "; path=/; expires=Sat, 01 Mar 2025 00:00:00 +0500";
-  </script>
-
-  <script src="js/template_35150cde8049ee46662e71f02ed469d0_v1.js"></script>
-  <script type="text/javascript">
-    var _ba = _ba || [];
-    _ba.push(["aid", "776766b01d8c3633642680d8baa3cb80"]);
-    _ba.push(["host", "www.ugrasu.ru"]);
-    (function() {
-      var ba = document.createElement("script");
-      ba.type = "text/javascript";
-      ba.async = true;
-      ba.src =
-        (document.location.protocol == "https:" ? "https://" : "http://") +
-        "bitrix.info/ba.js";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(ba, s);
-    })();
-  </script>
-  <script>
-    new Image().src =
-      "https://snojournal-ugrasu.ru/bitrix/spread.php?s=QklUUklYX1NNX1NIT1dfT1BST1MBMQExNzE5MjE1MzE2AS8BAQExAg%3D%3D&k=f1c7ac2c76a2b99314cb8497d82ccc38";
-    new Image().src =
-      "https://snojournal.ugrasu.ru/bitrix/spread.php?s=QklUUklYX1NNX1NIT1dfT1BST1MBMQExNzE5MjE1MzE2AS8BAQExAg%3D%3D&k=f1c7ac2c76a2b99314cb8497d82ccc38";
-    new Image().src =
-      "https://ovvpg.ugrasu.ru/bitrix/spread.php?s=QklUUklYX1NNX1NIT1dfT1BST1MBMQExNzE5MjE1MzE2AS8BAQExAg%3D%3D&k=f1c7ac2c76a2b99314cb8497d82ccc38";
-  </script>
-
-  <script>
-    (function(m, e, t, r, i, k, a) {
-      m[i] =
-        m[i] ||
-        function() {
-          (m[i].a = m[i].a || []).push(arguments);
-        };
-      m[i].l = 1 * new Date();
-      (k = e.createElement(t)),
-      (a = e.getElementsByTagName(t)[0]),
-      (k.async = 1),
-      (k.src = r),
-      a.parentNode.insertBefore(k, a);
-    })(
-      window,
-      document,
-      "script",
-      "https://mc.yandex.ru/metrika/tag.js",
-      "ym"
-    );
-
-    ym(68599984, "init", {
-      clickmap: true,
-      trackLinks: true,
-      accurateTrackBounce: true,
-      webvisor: true,
-    });
-  </script>
-  <script type="text/javascript">
-    !(function() {
-      var t = document.createElement("script");
-      (t.type = "text/javascript"),
-      (t.async = !0),
-      (t.src = "https://vk.com/js/api/openapi.js?169"),
-      (t.onload = function() {
-        VK.Retargeting.Init("VK-RTRG-1439458-5ZB0q"), VK.Retargeting.Hit();
-      }),
-      document.head.appendChild(t);
-    })();
-  </script>
-  <script>
-    (function(w, d, s, h, id) {
-      w.roistatProjectId = id;
-      w.roistatHost = h;
-      var p = d.location.protocol == "https:" ? "https://" : "http://";
-      var u = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie) ?
-        "/dist/module.js" :
-        "/api/site/1.0/" +
-        id +
-        "/init?referrer=" +
-        encodeURIComponent(d.location.href);
-      var js = d.createElement(s);
-      js.charset = "UTF-8";
-      js.async = 1;
-      js.src = p + h + u;
-      var js2 = d.getElementsByTagName(s)[0];
-      js2.parentNode.insertBefore(js, js2);
-    })(
-      window,
-      document,
-      "script",
-      "cloud.roistat.com",
-      "922bb3e7cdaa43cacbce635574e91781"
-    );
-  </script>
-  <script type="text/javascript">
-    $(window).scroll(function() {
-      if ($(window).scrollTop() > 500) {
-        $(".burger").addClass("semi");
-      } else {
-        $(".burger").removeClass("semi");
-      }
-    });
-  </script>
-
-  <script>
-    BX.ready(function() {
-      new JCTitleSearch({
-        AJAX_PAGE: "/",
-        CONTAINER_ID: "title-search",
-        INPUT_ID: "title-search-input",
-        MIN_QUERY_LEN: 2,
-      });
-    });
-  </script>
-
-  <script>
-    BX.ready(function() {
-      new JCTitleSearch({
-        AJAX_PAGE: "/",
-        CONTAINER_ID: "title-search",
-        INPUT_ID: "title-search-input",
-        MIN_QUERY_LEN: 2,
-      });
-    });
-  </script>
-  <script>
-    var length_title = $(".header-title").text().length;
-    if (length_title > 50) {
-      $(".header-title").addClass("title-middle");
-    }
-
-    if (length_title > 100) {
-      $(".header-title").addClass("title-small");
-    }
-  </script>
-
-  <script type="text/javascript">
-    function _processform_8BACKi() {
-      if (BX("bxajaxid_5d15b07c13f1658b7a203c18ef6931ae_8BACKi")) {
-        var obForm = BX(
-          "bxajaxid_5d15b07c13f1658b7a203c18ef6931ae_8BACKi"
-        ).form;
-        BX.bind(obForm, "submit", function() {
-          BX.ajax.submitComponentForm(
-            this,
-            "comp_5d15b07c13f1658b7a203c18ef6931ae",
-            true
-          );
-        });
-      }
-      BX.removeCustomEvent("onAjaxSuccess", _processform_8BACKi);
-    }
-    if (BX("bxajaxid_5d15b07c13f1658b7a203c18ef6931ae_8BACKi"))
-      _processform_8BACKi();
-    else BX.addCustomEvent("onAjaxSuccess", _processform_8BACKi);
-  </script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      var id_sogl = $('input[name="form_checkbox_sogl[]"]').attr("id");
-
-      $('input[name="form_checkbox_sogl[]"]').after(
-        '<label for="' +
-        id_sogl +
-        '" class="label_sogl">Я ознакомился с <a href="/local/templates/yugu2021/components/bitrix/form/question-webform/bitrix/form.result.new/.default/soglasie.pdf" target="_blank">Положением о защите персональных данных в ЮГУ</a> и даю согласие на обработку моих персональных данных</label>'
-      );
-
-      $(".label_sogl").next().remove();
-
-      $('input[name="form_checkbox_sogl[]"]').change(function() {
-        if (!this.checked) {
-          $(".form-submit").addClass("disabled");
-          $(".form-submit").attr("disabled", "disabled");
-        } else {
-          $(".form-submit").removeClass("disabled");
-          $(".form-submit").removeAttr("disabled");
-        }
-      });
-
-      $('input[name="form_checkbox_sogl[]"]').on("click", function() {
-        $(this).change(function() {
-          if (!this.checked) {
-            $(".form-submit").addClass("disabled");
-            $(".form-submit").attr("disabled", "disabled");
-          } else {
-            $(".form-submit").removeClass("disabled");
-            $(".form-submit").removeAttr("disabled");
-          }
-        });
-      });
-
-      $("input[type=radio]").parent("label").addClass("label-radio");
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-      /*$('.btn-promo').click(function () {
-              $('.show-promo').css('display', 'flex');
-          });
-
-          $('.header-content-video').click(function () {
-              $('.show-promo').css('display', 'flex');
-          });*/
-
-      $(".close-promo").click(function() {
-        $(".show-promo").css("display", "none");
-        var youtubeContainer = $("#youtube-show-promo");
-        var youtubeSrc = youtubeContainer.attr("src");
-        youtubeContainer.attr("src", "");
-        youtubeContainer.attr("src", youtubeSrc);
-      });
-
-      $(".search-ico").click(function() {
-        $(".search-show").toggleClass("active");
-        $(".search-show #title-search-input").focus();
-      });
-
-      $(".close-search-box").click(function() {
-        $(".search-show").toggleClass("active");
-        $(".search-show").css("top", -200);
-      });
-
-      $(".lang").on("click", function() {
-        $(this).toggleClass("show-lang");
-      });
-
-      $(document).mouseup(function(e) {
-        // событие клика по веб-документу
-        var div = $(".lang"); // тут указываем ID элемента
-        if (
-          !div.is(e.target) && // если клик был не по нашему блоку
-          div.has(e.target).length === 0
-        ) {
-          // и не по его дочерним элементам
-          div.removeClass("show-lang"); // скрываем его
-        }
-      });
-    });
-  </script>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $(".form_checkbox_pers_data").change(function() {
-        if (!this.checked) {
-          $("#send-form").addClass("disabled");
-        } else {
-          $("#send-form").removeClass("disabled");
-        }
-      });
-
-      $(".form_checkbox_pers_data").on("click", function() {
-        $(this).change(function() {
-          if (!this.checked) {
-            $("#send-form").addClass("disabled");
-          } else {
-            $("#send-form").removeClass("disabled");
-          }
-        });
-      });
-    });
-  </script>
-
-  <script type="text/javascript">
-    $("input[type=radio]").parent().addClass("label_radio");
-    $("input[type=checkbox]").parent().addClass("label_radio");
-
-    $("input[name=form_text_80]")
-      .parent()
-      .prev()
-      .parent()
-      .css("display", "none");
-    $("input[name='form_checkbox_sogl[]']")
-      .parent()
-      .prev()
-      .parent()
-      .css("display", "none");
-    $("input[name='form_checkbox_org[]']")
-      .parent()
-      .prev()
-      .css("display", "none");
-
-    $("input:radio[name=form_radio_q1]").on("click", function() {
-      var select_value = $("input:radio[name=form_radio_q1]:checked").val();
-      var mail_to;
-      var mail_to_copy = "zakaz@ugrasu.ru";
-
-      if (select_value == "75") {
-        mail_to = "nonpostv@ugrasu.ru" + ", " + mail_to_copy;
-      }
-
-      if (select_value == "76") {
-        mail_to = "nonpostv@ugrasu.ru" + ", " + mail_to_copy;
-      }
-
-      if (select_value == "77") {
-        mail_to = "nonpostv@ugrasu.ru" + ", " + mail_to_copy;
-      }
-
-      if (select_value == "78") {
-        mail_to = "nonpostv@ugrasu.ru" + ", " + mail_to_copy;
-      }
-
-      if (select_value == "79") {
-        mail_to = "nonpostv@ugrasu.ru" + ", " + mail_to_copy;
-      }
-
-      if (select_value == "82") {
-        mail_to = "nonpostv@ugrasu.ru" + ", " + mail_to_copy;
-      }
-
-      $("input[name=form_text_80]").val(mail_to);
-    });
-  </script>
-  <script>
-    var owl = $(".slider-banners-carousel");
-
-    $(document).ready(function() {
-      owl.owlCarousel({
-        loop: false,
-        margin: 20,
-        navText: "",
-        dots: true,
-        autoplay: true,
-        autoplayTimeout: 12000,
-        responsive: {
-          0: {
-            items: 1,
-          },
-          1000: {
-            items: 1,
-          },
-        },
-      });
-
-      heightSlide();
-
-      //Устанавливаем высоту слайда в зависимости от ширины слайда для desktop версии
-      function heightSlide() {
-        var widthSlide = $(".slider-banners-list").outerWidth();
-        var heightSlideDesk = (widthSlide * 31.25) / 100;
-        var heightSlideMob = (widthSlide * 135.5) / 100;
-        $(".slider-banners-list .desktop-item").css(
-          "height",
-          heightSlideDesk
-        );
-        $(".slider-banners-list .mobile-item").css("height", heightSlideMob);
-        $(".slider-banners-list .owl-stage-outer").css(
-          "height",
-          heightSlideDesk
-        );
-      }
-
-      $(window).resize(function() {
-        heightSlide();
-      });
-
-      /*Устанавливаем класс активности нажатого элемента*/
-      function indexItem() {
-        $(".serv-nav-item").removeClass("active");
-
-        var sectionIndex = $(".owl-item.active").index(); //Определяем порядковый номер активного слайда
-        $('.serv-nav-item[index="' + sectionIndex + '"]').addClass("active"); //У пункта в меню с таким же индексом устанавливем активность
-      }
-
-      $(".serv-nav-item").on("click", function() {
-        owl.trigger("to.owl.carousel", [$(this).index(), 300]);
-        indexItem();
-      });
-
-      owl.on("dragged.owl.carousel", function(event) {
-        indexItem();
-        addVisibleItem(); /*Перебираем все пункты и обновляем классы видимости*/
-      });
-
-      indexItem();
-    });
-  </script>
-  <script>
-    $(".news-list.owl-carousel").owlCarousel({
-      loop: false,
-      margin: 20,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        1000: {
-          items: 4,
-        },
-      },
-    });
-
-    $(document).ready(function() {
-      function resizeHeight() {
-        var max_height_news = [];
-        $(".item-news-name").each(function() {
-          max_height_news.push($(this).outerHeight());
-        });
-        $(".item-news-info").css(
-          "height",
-          Math.max.apply(null, max_height_news) + 25
-        );
-      }
-
-      setTimeout(function() {
-        resizeHeight();
-      }, 500);
-
-      $(".box-title-tab").on("click", function() {
-        resizeHeight();
-      });
-    });
-
-    $(window).resize(function() {
-      var max_height_news = [];
-      $(".item-news-name").each(function() {
-        max_height_news.push($(this).outerHeight());
-      });
-
-      $(".item-news-info").css(
-        "height",
-        Math.max.apply(null, max_height_news) + 25
-      );
-    });
-  </script>
-  <script>
-    $(".news-list.owl-carousel").owlCarousel({
-      loop: false,
-      margin: 20,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        1000: {
-          items: 4,
-        },
-      },
-    });
-
-    $(document).ready(function() {
-      function resizeHeight() {
-        var max_height_news = [];
-        $(".item-news-name").each(function() {
-          max_height_news.push($(this).outerHeight());
-        });
-        $(".item-news-info").css(
-          "height",
-          Math.max.apply(null, max_height_news) + 25
-        );
-      }
-
-      setTimeout(function() {
-        resizeHeight();
-      }, 500);
-
-      $(".box-title-tab").on("click", function() {
-        resizeHeight();
-      });
-    });
-
-    $(window).resize(function() {
-      var max_height_news = [];
-      $(".item-news-name").each(function() {
-        max_height_news.push($(this).outerHeight());
-      });
-
-      $(".item-news-info").css(
-        "height",
-        Math.max.apply(null, max_height_news) + 25
-      );
-    });
-  </script>
-  <script type="text/javascript">
-    $(".event-list.owl-carousel").owlCarousel({
-      loop: false,
-      margin: 20,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        1000: {
-          items: 4,
-        },
-      },
-    });
-
-    $(document).ready(function() {
-      var max_height_event = new Array();
-      $(".mini-event .item-event-name").each(function() {
-        max_height_event.push($(this).outerHeight());
-      });
-
-      $(".mini-event .item-event-info").css(
-        "height",
-        Math.max.apply(null, max_height_event) + 90
-      );
-    });
-
-    $(window).resize(function() {
-      var max_height_event = new Array();
-      $(".mini-event .item-event-name").each(function() {
-        max_height_event.push($(this).outerHeight());
-      });
-
-      $(".mini-event .item-event-info").css(
-        "height",
-        Math.max.apply(null, max_height_event) + 90
-      );
-    });
-  </script>
-  <script>
-    $(".tabs-wrapper").each(function() {
-      let ths = $(this);
-      ths.find(".tab-item").not(":first").hide();
-      ths.find(".title-more-item").not(":first").hide();
-      ths
-        .find(".box-title-tab")
-        .click(function() {
-          ths
-            .find(".box-title-tab")
-            .removeClass("active")
-            .eq($(this).index())
-            .addClass("active");
-          ths.find(".tab-item").hide().eq($(this).index()).fadeIn();
-          ths.find(".title-more-item").hide().eq($(this).index()).fadeIn();
-        })
-        .eq(0)
-        .addClass("active");
-    });
-
-    $(".box-title-tab").on("click", function() {
-      var max_height_event = new Array();
-      $(".mini-event .item-event-name").each(function() {
-        max_height_event.push($(this).outerHeight());
-      });
-
-      $(".mini-event .item-event-info").css(
-        "height",
-        Math.max.apply(null, max_height_event) + 90
-      );
-    });
-  </script>
-
-  <script>
-    $(".photoslider-carousel").owlCarousel({
-      items: 4,
-      loop: false,
-      margin: 20,
-      merge: true,
-      responsive: {
-        0: {
-          mergeFit: false,
-          items: 2,
-        },
-        678: {
-          mergeFit: true,
-        },
-        1000: {
-          mergeFit: false,
-        },
-      },
-    });
-
-    $(document).ready(function() {
-      $(".fancybox").fancybox();
-    });
-  </script>
-  <script>
-    var scene = document.getElementById("scene");
-    var parallaxInstance = new Parallax(scene, {
-      relativeInput: true,
-      clipRelativeInput: false,
-      limitY: false,
-      limitX: true,
-    });
-  </script>
-
-  <script>
-    $("#modal-opros").parent().addClass("open");
-    $("#modal-opros").addClass("open");
-  </script>
-
-  <script>
-    $(".table").wrap("<div class='table-box'></div>");
-  </script>
-
-  <script>
-    $(".section_name").click(function() {
-      $(this).next(".list-slider").toggleClass("active");
-      $(this).toggleClass("active");
-    });
-  </script>
-
-  <script type="text/javascript">
-    var _tmr = _tmr || [];
-    _tmr.push({
-      id: "1235539",
-      type: "pageView",
-      start: new Date().getTime(),
-    });
-    (function(d, w) {
-      var ts = d.createElement("script");
-      ts.type = "text/javascript";
-      ts.async = true;
-      ts.src =
-        (d.location.protocol == "https:" ? "https:" : "http:") +
-        "//top-fwz1.mail.ru/js/code.js";
-      var f = function() {
-        var s = d.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(ts, s);
-      };
-      if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-      } else {
-        f();
-      }
-    })(document, window);
-  </script>
-  <script type="text/javascript">
-    (function(d, t, p) {
-      var j = d.createElement(t);
-      j.async = true;
-      j.type = "text/javascript";
-      j.src =
-        ("https:" == p ? "https:" : "http:") + "//stat.sputnik.ru/cnt.js";
-      var s = d.getElementsByTagName(t)[0];
-      s.parentNode.insertBefore(j, s);
-    })(document, "script", document.location.protocol);
-  </script>
-  <script>
-    $(document).ready(function() {
-      if ($("html").outerHeight() >= $(window).outerHeight()) {
-        $("footer").css("bottom", "0 ! important");
-      } else {
-        $("footer").css(
-          "bottom",
-          $("footer").outerHeight() - 130,
-          "! important"
-        );
-      }
-    });
-
-    $(window).resize(function() {
-      if ($("html").outerHeight() >= $(window).outerHeight()) {
-        $("footer").css("bottom", "0 ! important");
-      } else {
-        $("footer").css(
-          "bottom",
-          -($(window).outerHeight() - $("html").outerHeight()),
-          "! important"
-        );
-      }
-    });
-  </script>
 </body>
 
 </html>
-<!--  -->
