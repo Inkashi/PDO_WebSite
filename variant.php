@@ -890,9 +890,9 @@ require 'connect.php';
           <div class="task">
             <div class="menu-cat"><span><?php if (isset($_SESSION["answers"][$id])) {
                                           if ($_SESSION["answers"][$id] == 1) {
-                                            echo "✔️" . $counter . ". ";
+                                            echo "✔️ " . $counter . ". ";
                                           } else if ($_SESSION["answers"][$id] == 0) {
-                                            echo "❌" . $counter . ". ";
+                                            echo "❌ " . $counter . ". ";
                                           }
                                         } else {
                                           echo $counter . ". ";
@@ -901,7 +901,7 @@ require 'connect.php';
             <input type = "text" name="<?php echo $id ?>" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                               echo " disabled";
                                             }
-                                            if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 1) {
+                                            if (!empty($_SESSION["data"][$id])) {
                                               echo " value='{$_SESSION['data'][$id]}'";
                                             } ?>>
           </div>
@@ -916,9 +916,9 @@ require 'connect.php';
           <div class="task">
             <div class="menu-cat"><span><?php if (isset($_SESSION["answers"][$id])) {
                                           if ($_SESSION["answers"][$id] == 1) {
-                                            echo "✔️" . $counter . ". ";
+                                            echo "✔️ " . $counter . ". ";
                                           } else if ($_SESSION["answers"][$id] == 0) {
-                                            echo "❌" . $counter . ". ";
+                                            echo "❌ " . $counter . ". ";
                                           }
                                         } else {
                                           echo $counter . ". ";
@@ -970,9 +970,9 @@ require 'connect.php';
           <div class="task">
             <div class="menu-cat"><span><?php if (isset($_SESSION["answers"][$id])) {
                                           if ($_SESSION["answers"][$id] == 1) {
-                                            echo "✔️" . $counter . ". ";
+                                            echo "✔️ " . $counter . ". ";
                                           } else if ($_SESSION["answers"][$id] == 0) {
-                                            echo "❌" . $counter . ". ";
+                                            echo "❌ " . $counter . ". ";
                                           }
                                         } else {
                                           echo $counter . ". ";
