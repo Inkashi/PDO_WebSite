@@ -16,22 +16,17 @@ require 'connect.php';
   <meta charset="utf-8" />
 
   <link rel="icon" href="images/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
   <meta property="og:title" content="Главная - Югорский государственный университет" />
-  <meta property="og:description " content="ЮГУ - все уровни образования:
-    высшее, СПО, ДПО. Топ-20 рейтинга hh.ru. Входит в " Лигу="" вузов"="" Газпрома.="" Базовая="" организация="" Профессионалитет="" -="" ТЭК."="">
-  <meta property="og:image" content="images/og-main2023.png" />
 
   <meta name="sputnik-verification" content="0zyZW3sjUi77ePPg" />
 
   <meta name="keywords" content="университет, Югра, Ханты-Мансийск" />
   <meta name="description" content="ЮГУ - все уровни образования: высшее, СПО,
-    ДПО. Топ-20 рейтинга hh.ru. Входит в " Лигу="" вузов"="" Газпрома.="" Базовая="" организация="" Профессионалитет="" -="" ТЭК."="">
-  <script async="" type="text/javascript" src="js/cnt.js"></script>
-  <script type="text/javascript" async="" src="js/code.js"></script>
-  <script charset="UTF-8" async="" src="init.html"></script>
-  <script async="" src="js/tag.js"></script>
-  <script type="text/javascript" async="" src="js/ba.js"></script>
+    ДПО. Топ-20 рейтинга hh.ru. Входит в " Лигу="" вузов="" Газпрома.="" Базовая="" организация="" Профессионалитет="" -="" ТЭК."="">
   <script type="text/javascript" data-skip-moving="true">
     (function(w, d, n) {
       var cl = "bx-core";
@@ -74,22 +69,6 @@ require 'connect.php';
 
   <link href="css/page_ac54fec5360ddfc45bb3accfc0e2f9e0_v1.css" type="text/css" rel="stylesheet" />
   <link href="css/template_272c9eb07a9c778c47de9b623c4f52d7_v1.css" type="text/css" data-template-style="true" rel="stylesheet" />
-
-  <!-- Yandex.Metrika counter -->
-  <noscript>
-    <div>
-      <img src="https://mc.yandex.ru/watch/68599984" style="position: absolute; left: -9999px" alt="" />
-    </div>
-  </noscript>
-  <!-- /Yandex.Metrika counter -->
-
-  <!-- Скрипт для отслеживания посетителей Pixel -->
-  <noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1439458-5ZB0q" style="position: fixed; left: -999px" alt="" />
-  </noscript>
-
-  <!-- Roistat Counter Start -->
-  <!-- Roistat Counter End -->
-  <script type="text/javascript" async="" src="js/openapi.917ca96d9331f956d945e39706791fde.js"></script>
 </head>
 
 <body>
@@ -114,7 +93,6 @@ require 'connect.php';
             </div>
           </div>
 
-          <a class="special_v-header" href="/?special_version=Y" rel="nofollow"></a>
           <a href="#" class="search-ico"></a>
           <!-- <a href="https://itport.ugrasu.ru/login" class="cabinet" target="_blank">
                 <div class="cabinet-ico"></div>
@@ -861,11 +839,12 @@ require 'connect.php';
 
 
   <div class="container">
+    <div class="container-header">
     <h2>Вариант <?php echo $_SESSION['number'] ?></h2>
-    
-    <div><?php if (isset($_SESSION["points"]) && $_SESSION["try_again"] ) {
-              echo $_SESSION["points"] . " % / 100%";
+    <div class="points" style =<? echo $_SESSION["points"] > 50 ? 'color:green' : 'color:rgba(200,0,0,80%)' ?> ><?php if (isset($_SESSION["points"]) && $_SESSION["try_again"] ) {
+              echo $_SESSION["points"] . "  / 100";
             }?> </div>
+    </div>
     <form action="check.php" method='post'>
       <style>
         .menu-cat {
@@ -925,23 +904,23 @@ require 'connect.php';
                                         }
                                         ?></span><?php echo $title ?></div>
             <checkbox class="block-options v1">
-              <div>
-                <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+              <div onclick="handleCheckboxClick(this)" >
+                <input type="radio" class="radio-btn variant1" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 1) {
                                                                           echo " checked";
                                                                         } ?>><?php echo $v1 ?>
               </div>
-              <div>
-                <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
+              <div onclick="handleCheckboxClick(this)">
+                <input type="radio" class="radio-btn variant1" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 2) {
                                                                           echo " checked";
                                                                         } ?>><?php echo $v2 ?>
               </div>
-              <div>
+              <div onclick="handleCheckboxClick(this)">
                 <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="3" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
@@ -949,7 +928,7 @@ require 'connect.php';
                                                                           echo " checked";
                                                                         } ?>><?php echo $v3 ?>
               </div>
-              <div>
+              <div onclick="handleCheckboxClick(this)">
                 <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="4" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
@@ -967,7 +946,7 @@ require 'connect.php';
           $v3 = $row['v3'];
           $v4 = $row['v4'];
         ?>
-          <div class="task">
+          <div class="task" >
             <div class="menu-cat"><span><?php if (isset($_SESSION["answers"][$id])) {
                                           if ($_SESSION["answers"][$id] == 1) {
                                             echo "✔️ " . $counter . ". ";
@@ -980,7 +959,7 @@ require 'connect.php';
                                         ?></span><?php echo $title ?></div>
             <div class="list-variant">
               <checkbox class="block-options">
-                <div>
+                <div onclick="handleCheckboxClick(this)">
                   <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
@@ -988,7 +967,7 @@ require 'connect.php';
                                                                             echo " checked";
                                                                           } ?>><?php echo $v1 ?>
                 </div>
-                <div>
+                <div onclick="handleCheckboxClick(this)">
                   <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
@@ -996,7 +975,7 @@ require 'connect.php';
                                                                             echo " checked";
                                                                           } ?>><?php echo $v2 ?>
                 </div>
-                <div>
+                <div onclick="handleCheckboxClick(this)">
                   <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="3" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
@@ -1004,7 +983,7 @@ require 'connect.php';
                                                                             echo " checked";
                                                                           } ?>><?php echo $v3 ?>
                 </div>
-                <div>
+                <div onclick="handleCheckboxClick(this)">
                   <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="4" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
@@ -1147,7 +1126,7 @@ require 'connect.php';
               Делитесь новостями об университете с хештегом #ЮГУ
             </div>
 
-            <a href="/sveden/common/" class="link-sveden">Сведения об образовательной организации</a>
+            <a href="https://sveden.ugrasu.ru/sveden/common/" class="link-sveden">Сведения об образовательной организации</a>
           </div>
 
           <div class="foot-menu-box col-xl-10 col-lg-9 col-md-8 col-sm-12 col-xs-12">
@@ -1239,5 +1218,14 @@ require 'connect.php';
     </div>
   </noscript>
 </body>
+
+<script>
+  function handleCheckboxClick(container) {
+    var input = container.querySelector('input[type="radio"]');
+    if (input) {
+      input.checked = !input.checked;
+    }
+}
+</script>
 
 </html>

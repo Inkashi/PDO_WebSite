@@ -563,6 +563,10 @@ pre code {
     padding-left: 20px;
   }
 
+  .variant{
+    font-size: 6vw;
+  }
+
   .specialities ul {
     column-count: 1 !important;
   }
@@ -577,7 +581,11 @@ pre code {
   }
 
   .list-variant .block-options{
-    width: 100% !important;
+    width: 90% !important;
+  }
+
+  .block-options > img{
+    padding-top: 5%;
   }
 
 }
@@ -9309,6 +9317,7 @@ button.bg-dark:focus {
   .text-sm-center {
     text-align: center !important;
   }
+
 }
 
 @media (min-width: 768px) {
@@ -11572,9 +11581,6 @@ header .header-content-video {
 	margin-bottom: -90px;
 }
 
-header .header-content-video:hover {
-	cursor: pointer;
-}
 
 .header-content-video::after {
 	background: rgba(0,28,79,0.5);
@@ -11584,17 +11590,6 @@ header .header-content-video:hover {
 	display: table;
 	position: absolute;
 	top: 0;
-}
-
-
-header .header-content-video:hover::after {
-	background: #19253C;
-	opacity: 0.8;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 100;
-	content: '';
 }
 
 
@@ -11614,11 +11609,6 @@ header .header-content-video::before {
 	transition: 0.3s ease;
 	opacity: 0;
 }
-
-header .header-content-video:hover::before {
-	opacity: 1;
-}
-
 
 header .header-buttons {
 	margin-top: 60px;
@@ -13875,8 +13865,8 @@ footer .minobr:hover {
 }
 
 .radio-btn{
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   margin-right: 10px !important;
   border: none;
 }
@@ -13896,6 +13886,7 @@ footer .minobr:hover {
 
 .pdf{
   background: url(/images/pdf_ico.svg) no-repeat !important;
+  background-size: contain !important;
   margin-left: 42px;
 }
 
@@ -13967,6 +13958,7 @@ footer .minobr:hover {
   border-radius: 20px;
   background-color: rgba(175, 238, 238,40%);
 }
+
 
 .task:nth-child(2n+1){
   background-color: #e9eff7;
@@ -14058,10 +14050,33 @@ input[type="text"]{
   margin-left: 5%;
 }
 
+.container-header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.container-header > h2{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.points{
+  font-family: 'Montserrat' !important;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 5%;
+  font-size:30px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .block-options div{
+  width: 100%;
   margin-top: 2vh;
   display: flex;
   align-items: center;
+  user-select:none;
 }
 
 
@@ -15119,7 +15134,7 @@ button.tns-nav-active {
 		font-size: 17px;
 	}
 
-	h2 {
+	h2, .points {
 		font-size: 26px;
 	}
 
@@ -15288,6 +15303,10 @@ button.tns-nav-active {
 		width: 80%;
 	}
 
+  .list-variant .block-options {
+    width: 90% !important;
+  }
+
 	.close-menu {
 		right: 0;
 		right: 10px;
@@ -15297,6 +15316,10 @@ button.tns-nav-active {
 		width: 80px;
 		height: 80px;
 	}	
+
+  .task{
+    padding:3%;
+  }
 
 	.contacts-box .contact-item .contact-item-top {
 		margin-bottom: 20px;
@@ -15416,6 +15439,10 @@ button.tns-nav-active {
 	.infograph-4 {
 		grid-template-columns: 1fr;
 	}
+
+  .task{
+    padding:3%;
+  }
 
 	iframe {
 		width: 100%;
