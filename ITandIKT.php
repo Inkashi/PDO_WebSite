@@ -1,6 +1,10 @@
 <?php 
   session_start();
   require 'connect.php';
+
+  if (!isset($_SESSION['subject'])){
+    header("Location: index.php");
+  }
 ?>
 
 <!DOCTYPE html>
@@ -1191,12 +1195,23 @@
     <div class="test-list">
       <ul>
         <?php
-            $sql = "SELECT * FROM variants WHERE subject_id = '$id'";
+            $sql = "SELECT COUNT(*) FROM variants WHERE subject_id = '$id'";
             $result = $link->query($sql);
-            
             foreach ($result as $row) {
-                $number = $row['number'];
-                $variant_id = $row['id'];
+              $num = $row["COUNT(*)"];
+            }
+            if ($num == 0) {
+        ?>
+              <div>Задания еще не добавлены</div>
+        <?php  
+            }
+            else {
+              $sql = "SELECT * FROM variants WHERE subject_id = '$id'";
+              $result = $link->query($sql);
+              
+              foreach ($result as $row) {
+                  $number = $row['number'];
+                  $variant_id = $row['id'];
         ?>
                 <li>
                     <a href="#" onclick="document.getElementById('var_form').submit()" class="variant">
@@ -1209,6 +1224,7 @@
                 </li>
         <?php
             }
+          }
         ?>
 
         <!-- <li><a href="variant.php" class="variant"><div>1</div>Вариант</a></li>

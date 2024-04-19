@@ -647,12 +647,12 @@ pre code {
   }
 
   .specialities ul {
-    column-count: 1 !important;
+    column-count: 2 !important;
   }
 
   .specialities li {
-    line-height: 20px !important;
-    font-size: 13px !important;
+    line-height: 24px !important;
+    font-size: 16px !important;
   }
 }
 
@@ -11404,9 +11404,9 @@ header .header-bottom .nav-link-block  {
 .specialities ul li {
   color: #FFFFFF;
   font-family: Montserrat;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   font-weight: 700;
-  line-height: 2.5vw;
+  line-height: 2.2vw;
   text-align: left;
 }
 
@@ -13864,11 +13864,16 @@ footer .minobr:hover {
 	display: block;
 }
 
+.radio-btn:focus{
+  outline: none !important;
+}
+
 .radio-btn{
   min-width: 20px;
   min-height: 20px;
   margin-right: 10px !important;
   border: none;
+  outline: none;
 }
 
 .v1{
@@ -15130,6 +15135,10 @@ button.tns-nav-active {
 
 
 @media (max-width: 1366px) {
+  .doc-name{
+    font-size:18px;
+  }
+
 	body {
 		font-size: 17px;
 	}
@@ -15270,6 +15279,10 @@ button.tns-nav-active {
 	header .header-content-img {
 		display: none;
 	}
+
+  .doc-name{
+    font-size: 18px;
+  }
 
 	header .container {
 		height: initial;

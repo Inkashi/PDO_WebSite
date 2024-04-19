@@ -1,6 +1,11 @@
 <?php
 session_start();
 require 'connect.php';
+
+if (!isset($_SESSION['variant_id'])){
+  header("Location: index.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -904,37 +909,37 @@ require 'connect.php';
                                         }
                                         ?></span><?php echo $title ?></div>
             <checkbox class="block-options v1">
-              <div onclick="handleCheckboxClick(this)" >
+              <div>
                 <input type="radio" class="radio-btn variant1" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 1) {
                                                                           echo " checked";
-                                                                        } ?>><?php echo $v1 ?>
+                                                                        } ?>> <span onclick="handleCheckboxClick(this.parentNode)"><?php echo $v1 ?></span>
               </div>
-              <div onclick="handleCheckboxClick(this)">
+              <div>
                 <input type="radio" class="radio-btn variant1" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 2) {
                                                                           echo " checked";
-                                                                        } ?>><?php echo $v2 ?>
+                                                                        } ?>><span onclick="handleCheckboxClick(this.parentNode)"><?php echo $v2 ?></span>
               </div>
-              <div onclick="handleCheckboxClick(this)">
+              <div>
                 <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="3" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 3) {
                                                                           echo " checked";
-                                                                        } ?>><?php echo $v3 ?>
+                                                                        } ?>><span onclick="handleCheckboxClick(this.parentNode)"><?php echo $v3 ?></span>
               </div>
-              <div onclick="handleCheckboxClick(this)">
+              <div>
                 <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="4" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                           echo " disabled";
                                                                         }
                                                                         if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 4) {
                                                                           echo " checked";
-                                                                        } ?>><?php echo $v4 ?>
+                                                                        } ?>><span onclick="handleCheckboxClick(this.parentNode)"><?php echo $v4 ?></span>
               </div>
             </checkbox>
           </div>
@@ -959,37 +964,37 @@ require 'connect.php';
                                         ?></span><?php echo $title ?></div>
             <div class="list-variant">
               <checkbox class="block-options">
-                <div onclick="handleCheckboxClick(this)">
+                <div>
                   <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="1" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
                                                                           if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 1) {
                                                                             echo " checked";
-                                                                          } ?>><?php echo $v1 ?>
+                                                                          } ?>><span onclick="handleCheckboxClick(this.parentNode)"><?php echo $v1 ?></span>
                 </div>
-                <div onclick="handleCheckboxClick(this)">
+                <div>
                   <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="2" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
                                                                           if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 2) {
                                                                             echo " checked";
-                                                                          } ?>><?php echo $v2 ?>
+                                                                          } ?>><span onclick="handleCheckboxClick(this.parentNode)"><?php echo $v2 ?></span>
                 </div>
-                <div onclick="handleCheckboxClick(this)">
+                <div>
                   <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="3" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
                                                                           if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 3) {
                                                                             echo " checked";
-                                                                          } ?>><?php echo $v3 ?>
+                                                                          } ?>><span onclick="handleCheckboxClick(this.parentNode)"><?php echo $v3 ?></span>
                 </div>
-                <div onclick="handleCheckboxClick(this)">
+                <div>
                   <input type="radio" class="radio-btn" name="<?php echo $id ?>" value="4" <?php if (!empty($_SESSION["give_answers"]) and $_SESSION["give_answers"] == true) {
                                                                             echo " disabled";
                                                                           }
                                                                           if (!empty($_SESSION["data"][$id]) and $_SESSION["data"][$id] == 4) {
                                                                             echo " checked";
-                                                                          } ?>><?php echo $v4 ?>
+                                                                          } ?>><span onclick="handleCheckboxClick(this.parentNode)"><?php echo $v4 ?></span>
                 </div>
               </checkbox>
               <div class="block-options">
@@ -1004,7 +1009,7 @@ require 'connect.php';
         $counter++;
       }
       ?>
-      <div style="display:flex; justify-content:center;"><button type='submit' class="btn"><?php if ($_SESSION["try_again"] == false) {
+      <div style="display:flex; justify-content:center;"><button type='submit' onclick="switch_tryAgain()" class="btn"><?php if ($_SESSION["try_again"] == false) {
                                                                                               echo "Проверить";
                                                                                             } else {
                                                                                               echo "Попробовать еще раз";
@@ -1012,10 +1017,6 @@ require 'connect.php';
     </form>
   </div>
   <?php
-  $_SESSION["give_answers"] = false;
-  $_SESSION["answers"] = [];
-  $_SESSION["data"] = [];
-  $_SESSION["points"] = 0;
   ?>
   <!-- <div class="task">
             <div class="menu-cat"><span>1.</span> Описание задачи (задача в которой просто ответ в input)</div>
@@ -1220,12 +1221,15 @@ require 'connect.php';
 </body>
 
 <script>
+  var try_again;
+  <?php if(!$_SESSION["try_again"]) echo("try_again = false;"); else echo("try_again = true;") ?>
+
   function handleCheckboxClick(container) {
-    var input = container.querySelector('input[type="radio"]');
-    if (input) {
-      input.checked = !input.checked;
-    }
-}
+        var input = container.querySelector('input[type="radio"]');
+        if (input && !try_again) {
+          input.checked = true;
+        }
+  };
 </script>
 
 </html>

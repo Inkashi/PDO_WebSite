@@ -39,7 +39,11 @@ if (!$_SESSION["try_again"]) {
     $_SESSION["give_answers"] = true;
     $_SESSION["try_again"] = true;
 } else {
-    $_SESSION["try_again"] = false;
+    $_SESSION["give_answers"] = false;
+	$_SESSION["answers"] = [];
+	$_SESSION["data"] = [];
+	$_SESSION["points"] = 0;
+	$_SESSION["try_again"] = false;
 }
 
 header("Location: variant.php");
